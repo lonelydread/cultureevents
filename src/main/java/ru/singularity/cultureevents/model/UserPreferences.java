@@ -1,6 +1,8 @@
 package ru.singularity.cultureevents.model;
 
 
+import lombok.Data;
+import java.util.List;
 
 @Data
 public class UserPreferences {
