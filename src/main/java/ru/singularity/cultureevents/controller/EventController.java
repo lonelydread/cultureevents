@@ -2,10 +2,19 @@ package ru.singularity.cultureevents.controller;
 
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import ru.singularity.cultureevents.dto.EventResponse;
+import ru.singularity.cultureevents.dto.RecommendationRequest;
+import ru.singularity.cultureevents.mapper.EventMapper;
 import ru.singularity.cultureevents.model.Event;
 import ru.singularity.cultureevents.service.EventService;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/events")
@@ -13,34 +22,17 @@ import java.util.List;
 public class EventController {
 
     private final EventService eventService;
+    private final EventMapper eventMapper;
 
-    @GetMapping
-    public List<Event> getAllEvents(@RequestParam(required = false) String city) {
-        // TODO: реализовать
-        return null;
-    }
+    @PostMapping("/recommendations")
+    public ResponseEntity<List<EventResponse>> getPersonalizedRecommendations(
+            @RequestBody RecommendationRequest request) {
 
-    @GetMapping("/{id}")
-    public Event getEventById(@PathVariable String id) {
-        // TODO: реализовать
-        return null;
-    }
+        List<Event> events = eventService.getPersonalizedRecommendations(request);
+        List<EventResponse> response = events.stream()
+                .map(eventMapper::toResponse)
+                .collect(Collectors.toList());
 
-    @GetMapping("/recommendations")
-    public List<Event> getRecommendedEvents(
-            @RequestParam String city,
-            @RequestParam(required = false) String mood,
-            @RequestParam String userId) {
-        // TODO: реализовать
-        return null;
-    }
-
-    @GetMapping("/search")
-    public List<Event> searchEvents(
-            @RequestParam String city,
-            @RequestParam(required = false) String category,
-            @RequestParam(required = false) String query) {
-        // TODO: реализовать
-        return null;
+        return ResponseEntity.ok(response);
     }
 }
