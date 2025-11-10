@@ -7,7 +7,6 @@ import java.util.List;
 public class RecommendationRequest {
     private String city;
     private List<String> favoriteCategories;
-    private Double maxPrice;
     private String preferredMood;
     private List<String> preferredAudiences;
     //todo
