@@ -1,0 +1,204 @@
+[
+  {
+    "id": 1,
+    "title": "Кофейня с видом на Неву",
+    "description": "Уютное место у воды, ароматный кофе и десерты с видом на набережную.",
+    "image_url": "https://example.com/images/cafe_neva.jpg",
+    "tags": {
+      "food": 1,
+      "indoor": 1,
+      "romantic": 1,
+      "calm": 1,
+      "medium_price": 1,
+      "day": 1
+    }
+  },
+  {
+    "id": 2,
+    "title": "Прогулка в Летнем саду",
+    "description": "Исторический парк, фонтаны, статуи и прохладная тень аллей.",
+    "image_url": "https://example.com/images/summer_garden.jpg",
+    "tags": {
+      "outdoor": 1,
+      "nature": 1,
+      "walk": 1,
+      "calm": 1,
+      "free": 1,
+      "day": 1
+    }
+  },
+  {
+    "id": 3,
+    "title": "Ночной бар",
+    "description": "Современный бар с коктейлями, диджеем и танцполом.",
+    "image_url": "https://example.com/images/blue_whale_bar.jpg",
+    "tags": {
+      "indoor": 1,
+      "nightlife": 1,
+      "fun": 1,
+      "noisy": 1,
+      "expensive": 1,
+      "evening": 1
+    }
+  },
+  {
+    "id": 4,
+    "title": "Катание на коньках в Юсуповском саду",
+    "description": "Зимний каток под открытым небом с музыкой и горячим глинтвейном.",
+    "image_url": "https://example.com/images/ice_skating.jpg",
+    "tags": {
+      "outdoor": 1,
+      "active": 1,
+      "sport": 1,
+      "cheap": 1,
+      "winter": 1
+    }
+  },
+  {
+    "id": 5,
+    "title": "Выставка современного искусства",
+    "description": "Необычные инсталляции и перформансы от молодых художников.",
+    "image_url": "https://example.com/images/art_exhibition.jpg",
+    "tags": {
+      "indoor": 1,
+      "culture": 1,
+      "calm": 1,
+      "medium_price": 1,
+      "any_season": 1
+    }
+  },
+  {
+    "id": 6,
+    "title": "Фестиваль уличной еды",
+    "description": "Фудтраки, музыка, мастер-классы и живая атмосфера.",
+    "image_url": "https://example.com/images/food_festival.jpg",
+    "tags": {
+      "outdoor": 1,
+      "food": 1,
+      "fun": 1,
+      "cheap": 1,
+      "summer": 1
+    }
+  },
+  {
+    "id": 7,
+    "title": "Поездка на велосипеде вдоль Финского залива",
+    "description": "Свежий воздух, вид на воду и спортивное настроение.",
+    "image_url": "https://example.com/images/bike_gulf.jpg",
+    "tags": {
+      "outdoor": 1,
+      "active": 1,
+      "sport": 1,
+      "nature": 1,
+      "free": 1,
+      "day": 1
+    }
+  },
+  {
+    "id": 8,
+    "title": "Кинотеатр под открытым небом",
+    "description": "Фильм под звёздами, уютные пледы и попкорн.",
+    "image_url": "https://example.com/images/rooftop_cinema.jpg",
+    "tags": {
+      "outdoor": 1,
+      "culture": 1,
+      "romantic": 1,
+      "medium_price": 1,
+      "summer": 1,
+      "evening": 1
+    }
+  },
+  {
+    "id": 9,
+    "title": "Антикафе с настольными играми",
+    "description": "Плати за время, играй в настолки, пей чай и общайся.",
+    "image_url": "https://example.com/images/boardgames_cafe.jpg",
+    "tags": {
+      "indoor": 1,
+      "fun": 1,
+      "friends": 1,
+      "cheap": 1,
+      "any_season": 1
+    }
+  },
+  {
+    "id": 10,
+    "title": "Прогулка по Эрмитажу",
+    "description": "Познавательно, спокойно и атмосферно.",
+    "image_url": "https://example.com/images/history_museum.jpg",
+    "tags": {
+      "indoor": 1,
+      "culture": 1,
+      "calm": 1,
+      "medium_price": 1,
+      "day": 1
+    }
+  },
+  {
+    "id": 11,
+    "title": "Прогулка по крышам",
+    "description": "Невероятные виды на город и ощущение свободы.",
+    "image_url": "https://example.com/images/rooftop_walk.jpg",
+    "tags": {
+      "outdoor": 1,
+      "active": 1,
+      "romantic": 1,
+      "fun": 1,
+      "medium_price": 1,
+      "summer": 1
+    }
+  },
+  {
+    "id": 12,
+    "title": "Мастер-класс по гончарному делу",
+    "description": "Расслабляющее творчество своими руками.",
+    "image_url": "https://example.com/images/ceramic_workshop.jpg",
+    "tags": {
+      "indoor": 1,
+      "culture": 1,
+      "creative": 1,
+      "calm": 1,
+      "medium_price": 1
+    }
+  },
+  {
+    "id": 13,
+    "title": "Поход в аквапарк",
+    "description": "Горки, волны и весёлое настроение для компании.",
+    "image_url": "https://example.com/images/aquapark.jpg",
+    "tags": {
+      "indoor": 1,
+      "active": 1,
+      "fun": 1,
+      "friends": 1,
+      "expensive": 1,
+      "any_season": 1
+    }
+  },
+  {
+    "id": 14,
+    "title": "Конная прогулка на природе",
+    "description": "Спокойствие, красота и единение с животными.",
+    "image_url": "https://example.com/images/dog_walk.jpg",
+    "tags": {
+      "outdoor": 1,
+      "active": 1,
+      "kindness": 1,
+      "cheap": 1,
+      "day": 1
+    }
+  },
+  {
+    "id": 15,
+    "title": "Романтический ужин в ресторане на крыше",
+    "description": "Свечи, панорама города и живая музыка.",
+    "image_url": "https://example.com/images/rooftop_dinner.jpg",
+    "tags": {
+      "indoor": 1,
+      "food": 1,
+      "romantic": 1,
+      "expensive": 1,
+      "evening": 1
+    }
+  }
+]
