@@ -8,12 +8,12 @@ import java.util.Map;
 
 public class RecommendationEngine {
 
-    private static final double CATEGORY_WEIGHT = 2.0;
-    private static final double MOOD_WEIGHT = 1.5;
-    private static final double AUDIENCE_WEIGHT = 1.2;
-    private static final double CITY_WEIGHT = 1.0;
-    private static final double WEATHER_WEIGHT = 1.8; // Высокий вес для погоды!
-    private static final double PRICE_WEIGHT = 0.8;
+    private static final double CATEGORY_WEIGHT = 0.5;
+    private static final double MOOD_WEIGHT = 0.6;
+//    private static final double AUDIENCE_WEIGHT = 1.2;
+//    private static final double CITY_WEIGHT = 1.0;
+//    private static final double WEATHER_WEIGHT = 1.8; // Высокий вес для погоды!
+//    private static final double PRICE_WEIGHT = 0.8;
     /**
      * Вычисляет косинусную схожесть между предпочтениями пользователя и тегами мероприятия
      */
@@ -50,9 +50,9 @@ public class RecommendationEngine {
 
 
         // Аудитория
-        for (String audience : event.getAudiences()) {
-            vector.put(audience, AUDIENCE_WEIGHT);
-        }
+//        for (String audience : event.getAudiences()) {
+//            vector.put(audience, AUDIENCE_WEIGHT);
+//        }
 
 
         return vector;
@@ -76,9 +76,9 @@ public class RecommendationEngine {
 
 
         // Предпочтительная аудитория
-            for (String audience : request.getPreferredAudiences()) {
-                vector.put(audience, AUDIENCE_WEIGHT);
-        }
+//            for (String audience : request.getPreferredAudiences()) {
+//                vector.put(audience, AUDIENCE_WEIGHT);
+//        }
 
 
         return vector;
