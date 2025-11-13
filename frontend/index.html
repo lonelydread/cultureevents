@@ -3,143 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MaxToGo - Открой свой город заново</title>
+    <title>MaxToGo - Персональный гид по вашему городу</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
-    <div class="container">
-        <!-- Header -->
-        <header>
+<body class="survey-page">
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-container">
             <div class="logo">
-                <span class="logo-icon">🌤️</span>
-                MaxToGo
+                <a href="index.html" class="logo-link">
+                    <div class="logo-icon">🌤️</div>
+                    <div class="logo-text">
+                        <span class="logo-primary">Max</span>
+                        <span class="logo-secondary">ToGo</span>
+                    </div>
+                </a>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="#features">Как работает</a></li>
-                    <li><a href="#about">О нас</a></li>
-                    <li><a href="#download">Скачать</a></li>
-                </ul>
+            <nav class="main-nav">
+                <a href="recommendations.html" class="nav-link">Рекомендации</a>
+                <a href="favorites.html" class="nav-link">Избранное</a>
+                <a href="history.html" class="nav-link">История</a>
+                <a href="profile.html" class="nav-link">Профиль</a>
             </nav>
-        </header>
-
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Открой свой город заново с <span class="highlight">MaxToGo</span></h1>
-                <p class="hero-subtitle">Персональные рекомендации мест для отдыха на основе вашего настроения, погоды и предпочтений</p>
-                
-                <div class="weather-mood-selector">
-                    <div class="selector-item">
-                        <label>🌡️ Погода сейчас</label>
-                        <select id="weather">
-                            <option value="sunny">☀️ Солнечно</option>
-                            <option value="cloudy">☁️ Облачно</option>
-                            <option value="rainy">🌧️ Дождь</option>
-                            <option value="snowy">❄️ Снег</option>
-                        </select>
-                    </div>
-                    
-                    <div class="selector-item">
-                        <label>😊 Ваше настроение</label>
-                        <select id="mood">
-                            <option value="active">💪 Активное</option>
-                            <option value="relax">😌 Расслабленное</option>
-                            <option value="social">👥 Общительное</option>
-                            <option value="creative">🎨 Творческое</option>
-                        </select>
-                    </div>
-                </div>
-
-                <button class="cta-button" onclick="findPlace()">
-                    🗺️ Найти идеальное место
-                </button>
+            <div class="auth-buttons">
+                <a href="profile.html" class="btn-outline">Войти</a>
             </div>
-            <div class="hero-image">
-                <div class="app-mockup">
-                    <div class="mockup-screen">
-                        <div class="recommendation-card">
-                            <div class="place-type">🎭 Культура</div>
-                            <h3>Городской музей</h3>
-                            <p>Идеально для дождливого дня и творческого настроения</p>
-                            <div class="distance">📍 1.2 км от вас</div>
+        </div>
+    </header>
+
+    <!-- Survey Section -->
+    <main class="survey-main">
+        <div class="survey-container">
+            <div class="survey-header">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+                <div class="skip-btn" id="skipSurvey">
+                    <a href="recommendations.html">Пропустить</a>
+                </div>
+            </div>
+
+            <div class="cards-container">
+                <!-- Card 1: Welcome -->
+                <div class="survey-card active" data-step="1">
+                    <div class="card-illustration">
+                        <div class="floating-elements">
+                            <div class="floating-element el1">🏃</div>
+                            <div class="floating-element el2">☕</div>
+                            <div class="floating-element el3">🎭</div>
+                            <div class="floating-element el4">🌳</div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Features -->
-        <section id="features" class="features">
-            <h2>Почему выбирают MaxToGo</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🌦️</div>
-                    <h3>Учет погоды</h3>
-                    <p>Рекомендации адаптируются под текущие погодные условия</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">😊</div>
-                    <h3>Учет настроения</h3>
-                    <p>Места под ваш эмоциональный настрой</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⭐</div>
-                    <h3>Персональные предпочтения</h3>
-                    <p>Учимся на ваших лайках и выборах</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🚶</div>
-                    <h3>Удобная навигация</h3>
-                    <p>Маршруты и время в пути</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Download Section -->
-        <section id="download" class="download">
-            <div class="download-content">
-                <h2>Скачайте MaxToGo сейчас</h2>
-                <p>Начните открывать новые места уже сегодня</p>
-                <div class="download-buttons">
-                    <button class="store-btn">
-                        <span>📱</span>
-                        App Store
-                    </button>
-                    <button class="store-btn">
-                        <span>🤖</span>
-                        Google Play
+                    <h1 class="card-title">Добро пожаловать в <span class="brand">MaxToGo</span></h1>
+                    <p class="card-description">Поможем найти идеальное место для отдыха на основе вашего настроения и предпочтений</p>
+                    <button class="btn-primary start-survey">
+                        Начать опрос
+                        <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
+
+                <!-- Card 2: Mood -->
+                <div class="survey-card" data-step="2">
+                    <div class="card-illustration">
+                        <div class="mood-options">
+                            <div class="mood-option" data-mood="active">
+                                <div class="mood-icon">💪</div>
+                                <span>Энергичный</span>
+                            </div>
+                            <div class="mood-option" data-mood="relaxed">
+                                <div class="mood-icon">😌</div>
+                                <span>Расслабленный</span>
+                            </div>
+                            <div class="mood-option" data-mood="social">
+                                <div class="mood-icon">👥</div>
+                                <span>Общительный</span>
+                            </div>
+                            <div class="mood-option" data-mood="creative">
+                                <div class="mood-icon">🎨</div>
+                                <span>Творческий</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="card-title">Какое у вас сегодня настроение?</h2>
+                    <p class="card-description">Выберите наиболее подходящий вариант</p>
+                    <div class="card-actions">
+                        <button class="btn-outline prev-card">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <button class="btn-primary next-card" disabled>
+                            Далее
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 3: Weather -->
+                <div class="survey-card" data-step="3">
+                    <div class="card-illustration">
+                        <div class="weather-options">
+                            <div class="weather-option" data-weather="sunny">
+                                <div class="weather-icon">☀️</div>
+                                <span>Солнечно</span>
+                            </div>
+                            <div class="weather-option" data-weather="cloudy">
+                                <div class="weather-icon">☁️</div>
+                                <span>Облачно</span>
+                            </div>
+                            <div class="weather-option" data-weather="rainy">
+                                <div class="weather-icon">🌧️</div>
+                                <span>Дождь</span>
+                            </div>
+                            <div class="weather-option" data-weather="snowy">
+                                <div class="weather-icon">❄️</div>
+                                <span>Снег</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="card-title">Какая сейчас погода?</h2>
+                    <p class="card-description">Это поможет подобрать подходящие места</p>
+                    <div class="card-actions">
+                        <button class="btn-outline prev-card">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <button class="btn-primary next-card" disabled>
+                            Далее
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 4: Interests -->
+                <div class="survey-card" data-step="4">
+                    <div class="card-illustration">
+                        <div class="interests-grid">
+                            <div class="interest-option" data-interest="food">
+                                <div class="interest-icon">🍕</div>
+                                <span>Еда</span>
+                            </div>
+                            <div class="interest-option" data-interest="nature">
+                                <div class="interest-icon">🌳</div>
+                                <span>Природа</span>
+                            </div>
+                            <div class="interest-option" data-interest="culture">
+                                <div class="interest-icon">🎭</div>
+                                <span>Культура</span>
+                            </div>
+                            <div class="interest-option" data-interest="sports">
+                                <div class="interest-icon">⚽</div>
+                                <span>Спорт</span>
+                            </div>
+                            <div class="interest-option" data-interest="shopping">
+                                <div class="interest-icon">🛍️</div>
+                                <span>Шоппинг</span>
+                            </div>
+                            <div class="interest-option" data-interest="entertainment">
+                                <div class="interest-icon">🎮</div>
+                                <span>Развлечения</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="card-title">Что вас интересует?</h2>
+                    <p class="card-description">Выберите один или несколько вариантов</p>
+                    <div class="card-actions">
+                        <button class="btn-outline prev-card">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <button class="btn-primary next-card" disabled>
+                            Далее
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 5: Complete -->
+                <div class="survey-card" data-step="5">
+                    <div class="card-illustration">
+                        <div class="confetti">
+                            <div class="confetti-piece"></div>
+                            <div class="confetti-piece"></div>
+                            <div class="confetti-piece"></div>
+                            <div class="confetti-piece"></div>
+                            <div class="confetti-piece"></div>
+                            <div class="complete-icon">🎉</div>
+                        </div>
+                    </div>
+                    <h2 class="card-title">Готово!</h2>
+                    <p class="card-description">Теперь мы знаем ваши предпочтения и готовы предложить лучшие места</p>
+                    <a href="recommendations.html" class="btn-primary show-main">
+                        Открыть рекомендации
+                        <i class="fas fa-map-marked-alt"></i>
+                    </a>
+                </div>
             </div>
-        </section>
 
-        <!-- Footer -->
-        <footer>
-            <p>&copy; 2025 MaxToGo. Хакатон MAX</p>
-        </footer>
-    </div>
+            <div class="swipe-hint">
+                <i class="fas fa-hand-point-up"></i>
+                <span>Можно свайпать карточки</span>
+            </div>
+        </div>
+    </main>
 
-    <script>
-        function findPlace() {
-            const weather = document.getElementById('weather').value;
-            const mood = document.getElementById('mood').value;
-            
-            const recommendations = {
-                sunny_active: "🎯 Парк для пробежки - идеально для солнечного дня!",
-                sunny_relax: "🌳 Ботанический сад - наслаждайтесь природой",
-                sunny_social: "🍻 Открытая терраса кафе - отличное место для встреч",
-                rainy_creative: "🎨 Художественная галерея - вдохновляющая атмосфера",
-                rainy_relax: "📚 Уютная библиотека - тишина и комфорт",
-                // Добавьте больше комбинаций...
-            };
-            
-            const key = `${weather}_${mood}`;
-            const message = recommendations[key] || "🏙️ Городской центр - всегда хороший выбор!";
-            
-            alert("MaxToGo рекомендует:\n\n" + message);
-        }
-    </script>
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MaxToGo</h3>
+                    <p>Персональный гид по вашему городу. Находите лучшие места для отдыха на основе вашего настроения и предпочтений.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="recommendations.html">Рекомендации</a></li>
+                        <li><a href="favorites.html">Избранное</a></li>
+                        <li><a href="history.html">История</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Поддержка</h4>
+                    <ul>
+                        <li><a href="faq.html">Частые вопросы</a></li>
+                        <li><a href="contact.html">Контакты</a></li>
+                        <li><a href="privacy.html">Политика конфиденциальности</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Следите за нами</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MaxToGo. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/survey.js"></script>
 </body>
 </html>
