@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -27,7 +28,14 @@ public class EventService {
         List<Event> baseEvents = eventRepository.findByCityAndDateAfterOrderByDateAsc(
                         request.getCity(), LocalDateTime.now()
                 ).stream()
-                .filter(p->p.getWeather().contains(weather) || p.getWeather().equals('any'))
+                .filter(p -> {
+                    String[] weatherArray = p.getWeather();
+
+                    String currentWeather = Parser.parseWeather(p.getCity());
+                    Set<String> weatherSet = Set.of(weatherArray);
+
+                    return weatherSet.contains("any") || weatherSet.contains(currentWeather);
+                })
                 .collect(Collectors.toList());
 
 
