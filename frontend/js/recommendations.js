@@ -13,9 +13,32 @@ class RecommendationsManager {
 
     init() {
         this.loadUserData();
-        this.generateRecommendations();
+        this.loadRecommendationsFromBackend(); // Заменяем generateRecommendations
         this.bindEvents();
         this.updateResultsCount();
+    }
+
+    async loadRecommendationsFromBackend() {
+        try {
+            // Пытаемся загрузить рекомендации из localStorage
+            const savedRecommendations = localStorage.getItem('recommendations');
+            
+            if (savedRecommendations) {
+                this.recommendations = JSON.parse(savedRecommendations);
+                console.log('Loaded recommendations from backend:', this.recommendations);
+            } else {
+                // Если нет сохраненных рекомендаций, используем демо-данные
+                console.log('No backend recommendations found, using demo data');
+                this.generateDemoRecommendations();
+            }
+            
+            this.renderRecommendations();
+            
+        } catch (error) {
+            console.error('Error loading recommendations:', error);
+            this.generateDemoRecommendations();
+            this.renderRecommendations();
+        }
     }
 
     loadUserData() {
