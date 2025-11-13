@@ -19,20 +19,9 @@ import java.util.TimerTask;
 public class Parser {
     // базовый адрес сайта
     private static final String BASE_URL = "https://pogoda.mail.ru/prognoz/";
-    // город — эту переменную можно менять
-    private static String city = "sankt_peterburg";
 
-    public static void main(String[] args) {
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                parseWeather();
-            }
-        }, 0, 60 * 1000); // каждые 60 секунд
-    }
 
-    private static void parseWeather() {
+    public static String parseWeather(String city) {
         String url = BASE_URL + city + "/24hours/";
         try {
             Document doc = Jsoup.connect(url).get();
@@ -44,13 +33,17 @@ public class Parser {
                 String weather = description.text();
                 System.out.println("[" + LocalTime.now() + "] " +
                         "Погода в " + city + ": " + weather);
+                return weather;
             } else {
-                System.out.println("[" + LocalTime.now() + "] " +
-                        "Не удалось найти описание погоды на странице.");
+                String error = "Не удалось найти описание погоды";
+                System.out.println("[" + LocalTime.now() + "] " + error);
+                return error;
             }
 
         } catch (IOException e) {
-            System.out.println("Ошибка подключения: " + e.getMessage());
+            String error = "Ошибка подключения: " + e.getMessage();
+            System.out.println(error);
+            return error;
         }
     }
 }
