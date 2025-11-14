@@ -18,14 +18,6 @@ class ProfileManager {
         const savedData = localStorage.getItem('userData');
         if (savedData) {
             this.userData = JSON.parse(savedData);
-        } else {
-            // Default data
-            this.userData = {
-                name: 'Александр Петров',
-                mood: 'active',
-                weather: 'sunny',
-                interests: ['food', 'nature', 'art', 'library']
-            };
         }
     }
 

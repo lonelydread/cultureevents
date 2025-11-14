@@ -89,17 +89,17 @@ class SurveyManager {
 
     toggleInterest(element) {
         element.classList.toggle('selected');
-        const interest = element.dataset.interest;
+        const favoriteTags = element.dataset.interest;
         
         if (element.classList.contains('selected')) {
-            this.userData.interests.push(interest);
+            this.userData.favoriteTags.push(interest);
         } else {
-            this.userData.interests = this.userData.interests.filter(i => i !== interest);
+            this.userData.favoriteTags = this.userData.favoriteTags.filter(i => i !== interest);
         }
         
         // Enable next button if at least one interest is selected
         const nextBtn = element.closest('.survey-card').querySelector('.next-card');
-        nextBtn.disabled = this.userData.interests.length === 0;
+        nextBtn.disabled = this.userData.favoriteTags.length === 0;
     }
 
     nextStep() {
@@ -148,19 +148,6 @@ class SurveyManager {
         progressFill.style.width = `${progress}%`;
     }
 
-    skipSurvey() {
-        // Set default user data
-        this.userData = {
-            name: 'Друг',
-            mood: 'relaxed',
-            weather: 'sunny',
-            interests: ['food', 'nature']
-        };
-        this.saveUserData();
-        
-        // Redirect to recommendations
-        window.location.href = 'recommendations.html';
-    }
 
     saveUserData() {
         localStorage.setItem('userData', JSON.stringify(this.userData));
@@ -174,8 +161,8 @@ class SurveyManager {
             
             // Подготавливаем данные для отправки
             const requestData = {
-                city: this.userData.city || "Москва", // Добавляем город по умолчанию
-                favoriteCategories: this.userData.interests,
+                city: this.userData.city, // Добавляем город по умолчанию
+                favoriteCategories: this.userData.favoriteTags,
                 preferredMood: this.userData.mood
             };
 
@@ -209,10 +196,6 @@ class SurveyManager {
             // Показываем сообщение об ошибке
             this.showError('Не удалось загрузить рекомендации. Пожалуйста, попробуйте позже.');
             
-            // Все равно перенаправляем на страницу рекомендаций (с демо-данными)
-            setTimeout(() => {
-                window.location.href = 'recommendations.html';
-            }, 2000);
         }
     }
 

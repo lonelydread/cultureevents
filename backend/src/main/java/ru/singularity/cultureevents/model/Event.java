@@ -26,7 +26,7 @@ public class Event {
 
     @Convert(converter = StringArrayConverter.class)
     @Column(columnDefinition = "text[]")
-    private String[] categories; // concert, exhibition, theater, festival, standup
+    private String[] tags; // concert, exhibition, theater, festival, standup
 
     @Column(nullable = false)
     private String city;
