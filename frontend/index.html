@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaxToGo - Персональный гид по вашему городу</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://st.max.ru/js/max-web-app.js"></script>
+</head>
+<body class="survey-page">
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html" class="logo-link">
+                    <div class="logo-icon">🌤️</div>
+                    <div class="logo-text">
+                        <span class="logo-primary">Max</span>
+                        <span class="logo-secondary">ToGo</span>
+                    </div>
+                </a>
+            </div>
+            <nav class="main-nav">
+                <a href="recommendations.html" class="nav-link">Рекомендации</a>
+                <a href="favorites.html" class="nav-link">Избранное</a>
+                <!-- <a href="history.html" class="nav-link">История</a> -->
+                <a href="profile.html" class="nav-link">Профиль</a>
+            </nav>
+            <!-- <div class="auth-buttons">
+                <a href="profile.html" class="btn-outline">Войти</a>
+            </div> -->
+        </div>
+    </header>
+
+    <!-- Survey Section -->
+    <main class="survey-main">
+        <div class="survey-container">
+            <div class="survey-header">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+                <!-- <div class="skip-btn" id="skipSurvey">
+                    <a href="recommendations.html">Пропустить</a>
+                </div> -->
+            </div>
+
+            <div class="cards-container">
+                <!-- Card 1: Welcome -->
+                <div class="survey-card active" data-step="1">
+                    <div class="card-illustration">
+                        <div class="floating-elements">
+                            <div class="floating-element el1">🏃</div>
+                            <div class="floating-element el2">☕</div>
+                            <div class="floating-element el3">🎭</div>
+                            <div class="floating-element el4">🌳</div>
+                        </div>
+                    </div>
+                    <h1 class="card-title">Добро пожаловать в <span class="brand">MaxToGo</span></h1>
+                    <p class="card-description">Поможем найти идеальное место для отдыха на основе вашего настроения и предпочтений</p>
+                    <button class="btn-primary start-survey">
+                        Начать опрос
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Card 2: Mood -->
+                <div class="survey-card" data-step="2">
+                    <div class="card-illustration">
+                        <div class="mood-options">
+                            <div class="mood-option" data-mood="active">
+                                <div class="mood-icon">💪</div>
+                                <span>Энергичный</span>
+                            </div>
+                            <div class="mood-option" data-mood="relaxed">
+                                <div class="mood-icon">😌</div>
+                                <span>Расслабленный</span>
+                            </div>
+                            <div class="mood-option" data-mood="social">
+                                <div class="mood-icon">👥</div>
+                                <span>Общительный</span>
+                            </div>
+                            <div class="mood-option" data-mood="creative">
+                                <div class="mood-icon">🎨</div>
+                                <span>Творческий</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="card-title">Какое у вас сегодня настроение?</h2>
+                    <p class="card-description">Выберите наиболее подходящий вариант</p>
+                    <div class="card-actions">
+                        <button class="btn-outline prev-card">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <button class="btn-primary next-card" disabled>
+                            Далее
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 3: Weather -->
+                <div class="survey-card" data-step="3">
+                    <div class="card-illustration">
+                        <div class="weather-options">
+                            <div class="weather-option" data-weather="sunny">
+                                <div class="weather-icon">☀️</div>
+                                <span>Солнечно</span>
+                            </div>
+                            <div class="weather-option" data-weather="cloudy">
+                                <div class="weather-icon">☁️</div>
+                                <span>Облачно</span>
+                            </div>
+                            <div class="weather-option" data-weather="rainy">
+                                <div class="weather-icon">🌧️</div>
+                                <span>Дождь</span>
+                            </div>
+                            <div class="weather-option" data-weather="snowy">
+                                <div class="weather-icon">❄️</div>
+                                <span>Снег</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="card-title">Какая сейчас погода?</h2>
+                    <p class="card-description">Это поможет подобрать подходящие места</p>
+                    <div class="card-actions">
+                        <button class="btn-outline prev-card">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <button class="btn-primary next-card" disabled>
+                            Далее
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 4: Interests -->
+                <div class="survey-card" data-step="4">
+                    <div class="card-illustration">
+                        <div class="interests-grid">
+                            <div class="interest-option" data-interest="music">
+                                <div class="interest-icon">🎵</div>
+                                <span>Музыка</span>
+                            </div>
+                            <div class="interest-option" data-interest="nature">
+                                <div class="interest-icon">🌳</div>
+                                <span>Природа</span>
+                            </div>
+                            <div class="interest-option" data-interest="culture">
+                                <div class="interest-icon">🎭</div>
+                                <span>Культура</span>
+                            </div>
+                            <div class="interest-option" data-interest="sports">
+                                <div class="interest-icon">⚽</div>
+                                <span>Спорт</span>
+                            </div>
+                            <div class="interest-option" data-interest="science">
+                                <div class="interest-icon">🔬</div>
+                                <span>Наука</span>
+                            </div>
+                            <div class="interest-option" data-interest="art">
+                                <div class="interest-icon">🎨</div>
+                                <span>Искусство</span>
+                            </div>
+                        </div>
+                    </div>
+                    <h2 class="card-title">Что вас интересует?</h2>
+                    <p class="card-description">Выберите один или несколько вариантов</p>
+                    <div class="card-actions">
+                        <button class="btn-outline prev-card">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <button class="btn-primary next-card" disabled>
+                            Далее
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 5: Complete -->
+                <div class="survey-card" data-step="5">
+                    <div class="card-illustration">
+                        <div class="confetti">
+                            <div class="confetti-piece"></div>
+                            <div class="confetti-piece"></div>
+                            <div class="confetti-piece"></div>
+                            <div class="confetti-piece"></div>
+                            <div class="confetti-piece"></div>
+                            <div class="complete-icon">🎉</div>
+                        </div>
+                    </div>
+                    <h2 class="card-title">Готово!</h2>
+                    <p class="card-description">Теперь мы знаем ваши предпочтения и готовы предложить лучшие места</p>
+                    <a href="recommendations.html" class="btn-primary show-main">
+                        Открыть рекомендации
+                        <i class="fas fa-map-marked-alt"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="swipe-hint">
+                <i class="fas fa-hand-point-up"></i>
+                <span>Можно свайпать карточки</span>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/survey.js"></script>
+</body>
+</html>

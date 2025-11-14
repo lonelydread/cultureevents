@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль - MaxToGo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://st.max.ru/js/max-web-app.js"></script>
+</head>
+<body class="profile-page">
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html" class="logo-link">
+                    <div class="logo-icon">🌤️</div>
+                    <div class="logo-text">
+                        <span class="logo-primary">Max</span>
+                        <span class="logo-secondary">ToGo</span>
+                    </div>
+                </a>
+            </div>
+            <nav class="main-nav">
+                <a href="recommendations.html" class="nav-link">Рекомендации</a>
+                <a href="favorites.html" class="nav-link">Избранное</a>
+                <!-- <a href="history.html" class="nav-link">История</a> -->
+                <a href="profile.html" class="nav-link active">Профиль</a>
+            </nav>
+            <div class="user-section">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <div class="user-greeting">Привет, <span id="displayName">Друг</span>!</div>
+                        <div class="user-mood" id="userMood">😊 Отличное настроение</div>
+                    </div>
+                </div>
+                <button class="settings-btn" id="settingsBtn">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">Профиль</h1>
+            <p class="page-subtitle">Управление вашим аккаунтом</p>
+        </div>
+        
+        <div class="profile-container">
+            <!-- Profile Card -->
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="profile-avatar-large">
+                        <div class="avatar-image">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <button class="avatar-edit-btn">
+                            <i class="fas fa-camera"></i>
+                        </button>
+                    </div>
+                    <div class="profile-info">
+                        <h2 id="profileName">Александр Петров</h2>
+                        <!-- <p class="profile-email">alex.petrov@example.com</p> -->
+                        <div class="profile-badges">
+                            <span class="badge primary">⭐ Исследователь</span>
+                            <span class="badge secondary">🏆 12 мест</span>
+                        </div>
+                    </div>
+                    <!-- <button class="edit-profile-btn">
+                        <i class="fas fa-edit"></i>
+                        Редактировать
+                    </button> -->
+                </div>
+                
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="visitedPlaces">24</div>
+                        <div class="stat-label">Посещено мест</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="favoritesCount">8</div>
+                        <div class="stat-label">В избранном</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="daysActive">127</div>
+                        <div class="stat-label">Дней с нами</div>
+                    </div>
+                    <!-- <div class="stat-item">
+                        <div class="stat-value">4.3</div>
+                        <div class="stat-label">Средний рейтинг</div>
+                    </div> -->
+                </div>
+            </div>
+
+            <!-- Preferences Section -->
+            <!-- <div class="preferences-section">
+                <div class="section-header">
+                    <h3>Предпочтения</h3>
+                    <button class="section-edit-btn">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                </div>
+                <div class="preferences-list">
+                    <div class="preference-item">
+                        <div class="preference-info">
+                            <span class="preference-label">Любимые категории</span>
+                            <div class="preference-tags" id="preferenceTags">
+                                <span class="tag">☕ Кафе</span>
+                                <span class="tag">🌳 Парки</span>
+                                <span class="tag">🎨 Искусство</span>
+                                <span class="tag">📚 Библиотеки</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="preference-item">
+                        <div class="preference-info">
+                            <span class="preference-label">Предпочитаемое время</span>
+                            <span class="preference-value">Вечер (18:00-22:00)</span>
+                        </div>
+                    </div>
+                    <div class="preference-item">
+                        <div class="preference-info">
+                            <span class="preference-label">Бюджет</span>
+                            <span class="preference-value">💰💰 Средний (500-1500 руб)</span>
+                        </div>
+                    </div>
+                    <div class="preference-item">
+                        <div class="preference-info">
+                            <span class="preference-label">Компания</span>
+                            <span class="preference-value">👥 С друзьями, 👨‍👩‍👧‍👦 Семьей</span>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- Achievements Section -->
+            <div class="achievements-section">
+                <div class="section-header">
+                    <h3>Достижения</h3>
+                    <span class="achievements-count">5/12</span>
+                </div>
+                <div class="achievements-grid">
+                    <div class="achievement-card unlocked">
+                        <div class="achievement-icon">🏆</div>
+                        <div class="achievement-info">
+                            <h4>Первое посещение</h4>
+                            <p>Посетите ваше первое место</p>
+                        </div>
+                        <div class="achievement-badge">
+                            <i class="fas fa-check"></i>
+                        </div>
+                    </div>
+                    <div class="achievement-card unlocked">
+                        <div class="achievement-icon">⭐</div>
+                        <div class="achievement-info">
+                            <h4>Исследователь</h4>
+                            <p>Посетите 10 разных мест</p>
+                        </div>
+                        <div class="achievement-badge">
+                            <i class="fas fa-check"></i>
+                        </div>
+                    </div>
+                    <div class="achievement-card unlocked">
+                        <div class="achievement-icon">❤️</div>
+                        <div class="achievement-info">
+                            <h4>Коллекционер</h4>
+                            <p>Добавьте 5 мест в избранное</p>
+                        </div>
+                        <div class="achievement-badge">
+                            <i class="fas fa-check"></i>
+                        </div>
+                    </div>
+                    <div class="achievement-card locked">
+                        <div class="achievement-icon">🌙</div>
+                        <div class="achievement-info">
+                            <h4>Ночная сова</h4>
+                            <p>Посетите 3 места после 22:00</p>
+                        </div>
+                        <div class="achievement-badge">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                    </div>
+                    <div class="achievement-card locked">
+                        <div class="achievement-icon">🏃</div>
+                        <div class="achievement-info">
+                            <h4>Активный отдых</h4>
+                            <p>Посетите 5 спортивных мест</p>
+                        </div>
+                        <div class="achievement-badge">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div class="settings-section">
+                <div class="section-header">
+                    <h3>Настройки</h3>
+                </div>
+                <div class="settings-list">
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <i class="fas fa-bell setting-icon"></i>
+                            <div class="setting-details">
+                                <span class="setting-label">Уведомления</span>
+                                <span class="setting-description">Получать уведомления о новых рекомендациях</span>
+                            </div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <!-- <div class="setting-item">
+                        <div class="setting-info">
+                            <i class="fas fa-moon setting-icon"></i>
+                            <div class="setting-details">
+                                <span class="setting-label">Темная тема</span>
+                                <span class="setting-description">Использовать темную цветовую схему</span>
+                            </div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div> -->
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <i class="fas fa-map-marker-alt setting-icon"></i>
+                            <div class="setting-details">
+                                <span class="setting-label">Геолокация</span>
+                                <span class="setting-description">Использовать текущее местоположение</span>
+                            </div>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <i class="fas fa-language setting-icon"></i>
+                            <div class="setting-details">
+                                <span class="setting-label">Язык</span>
+                                <span class="setting-description">Русский</span>
+                            </div>
+                        </div>
+                        <div class="setting-action">
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Account Actions -->
+            <!-- <div class="account-actions">
+                <div class="action-buttons">
+                    <button class="action-btn outline">
+                        <i class="fas fa-question-circle"></i>
+                        Помощь и поддержка
+                    </button>
+                    <button class="action-btn outline">
+                        <i class="fas fa-star"></i>
+                        Оценить приложение
+                    </button>
+                    <button class="action-btn danger">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Выйти из аккаунта
+                    </button>
+                </div>
+            </div> -->
+
+            <!-- App Info -->
+            <div class="app-info">
+                <div class="info-item">
+                    <span>Версия приложения</span>
+                    <span class="info-value">1.2.0</span>
+                </div>
+                <div class="info-item">
+                    <span>Последнее обновление</span>
+                    <span class="info-value">15.03.2024</span>
+                </div>
+                <div class="info-item">
+                    <span>Условия использования</span>
+                    <span class="info-value link">Прочитать</span>
+                </div>
+                <div class="info-item">
+                    <span>Политика конфиденциальности</span>
+                    <span class="info-value link">Ознакомиться</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/profile.js"></script>
+</body>
+</html>

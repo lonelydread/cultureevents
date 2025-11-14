@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рекомендации - MaxToGo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://st.max.ru/js/max-web-app.js"></script>
+</head>
+<body class="recommendations-page">
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html" class="logo-link">
+                    <div class="logo-icon">🌤️</div>
+                    <div class="logo-text">
+                        <span class="logo-primary">Max</span>
+                        <span class="logo-secondary">ToGo</span>
+                    </div>
+                </a>
+            </div>
+            <nav class="main-nav">
+                <a href="recommendations.html" class="nav-link active">Рекомендации</a>
+                <a href="favorites.html" class="nav-link">Избранное</a>
+                <!-- <a href="history.html" class="nav-link">История</a> -->
+                <a href="profile.html" class="nav-link">Профиль</a>
+            </nav>
+            <div class="user-section">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <div class="user-greeting">Привет, <span id="displayName">Друг</span>!</div>
+                        <div class="user-mood" id="userMood">😊 Отличное настроение</div>
+                    </div>
+                </div>
+                <button class="settings-btn" id="settingsBtn">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Banner -->
+        <section class="hero-banner">
+            <div class="banner-content">
+                <h1 class="banner-title">Куда сходить сегодня?</h1>
+                <p class="banner-subtitle">Мы подобрали места специально для вас</p>
+                <div class="weather-widget">
+                    <div class="weather-icon">☀️</div>
+                    <div class="weather-info">
+                        <div class="weather-temp">+23°C</div>
+                        <div class="weather-desc">Солнечно, идеально для прогулок</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filters Section -->
+        <!-- <section class="filters-section">
+            <div class="filters-header">
+                <h2>Уточните поиск</h2>
+                <button class="filter-reset">Сбросить всё</button>
+            </div>
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <label>📍 Близость</label>
+                    <select class="filter-select">
+                        <option>До 1 км</option>
+                        <option>До 3 км</option>
+                        <option>До 5 км</option>
+                        <option>Любое расстояние</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>💰 Ценовой диапазон</label>
+                    <select class="filter-select">
+                        <option>💰 Бесплатно</option>
+                        <option>💰💰 Бюджетный</option>
+                        <option>💰💰💰 Средний</option>
+                        <option>💰💰💰💰 Премиум</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>🕒 Время посещения</label>
+                    <select class="filter-select">
+                        <option>🕛 Утро (6:00-12:00)</option>
+                        <option>🕛 День (12:00-18:00)</option>
+                        <option>🕛 Вечер (18:00-24:00)</option>
+                        <option>🕛 Ночь (00:00-6:00)</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>⭐ Рейтинг</label>
+                    <select class="filter-select">
+                        <option>⭐ 4.0+ и выше</option>
+                        <option>⭐⭐ 4.3+ и выше</option>
+                        <option>⭐⭐⭐ 4.5+ и выше</option>
+                        <option>⭐⭐⭐⭐ 4.7+ и выше</option>
+                    </select>
+                </div>
+            </div>
+        </section> -->
+
+        <!-- Recommendations Section -->
+        <section class="recommendation-section">
+            <div class="section-header">
+                <h2 class="section-title">Персональные рекомендации</h2>
+            </div>
+
+            <div class="recommendations-grid">
+                <!-- Recommendation Card 1 -->
+                <div class="recommendation-card">
+                    <div class="card-image">
+                        🌳
+                        <div class="place-type">🌳 Парк</div>
+                        <button class="favorite-btn">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="card-content">
+                        <h3>Центральный парк культуры</h3>
+                        <p>Просторный парк с озерами, велодорожками и зонами для пикника. Идеально для активного отдыха.</p>
+                        <div class="card-actions">
+                            <button class="action-btn secondary-action">
+                                <i class="fas fa-info-circle"></i>
+                                Подробнее
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendation Card 2 -->
+                <div class="recommendation-card">
+                    <div class="card-image">
+                        🎨
+                        <div class="place-type">🎨 Искусство</div>
+                        <button class="favorite-btn">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="card-content">
+                        <h3>Галерея современного искусства</h3>
+                        <p>Современные выставки, инсталляции и мастер-классы. Вдохновляющая атмосфера для творческих натур.</p>
+                        <div class="card-actions">
+                            <button class="action-btn secondary-action">
+                                <i class="fas fa-info-circle"></i>
+                                Подробнее
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendation Card 3 -->
+                <div class="recommendation-card">
+                    <div class="card-image">
+                        ☕
+                        <div class="place-type">☕ Кафе</div>
+                        <button class="favorite-btn">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="card-content">
+                        <h3>Кофейня "Уютный уголок"</h3>
+                        <p>Атмосферное место с авторским кофе и домашней выпечкой. Бесплатный Wi-Fi и розетки.</p>
+                        <div class="card-actions">
+                            <button class="action-btn secondary-action">
+                                <i class="fas fa-info-circle"></i>
+                                Подробнее
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendation Card 4 -->
+                <div class="recommendation-card">
+                    <div class="card-image">
+                        ⚽
+                        <div class="place-type">⚽ Спорт</div>
+                        <button class="favorite-btn">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="card-content">
+                        <h3>Спортивный комплекс "Энергия"</h3>
+                        <p>Современный фитнес-центр с бассейном, тренажерным залом и групповыми занятиями.</p>
+                        <div class="card-actions">
+                            <button class="action-btn secondary-action">
+                                <i class="fas fa-info-circle"></i>
+                                Подробнее
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendation Card 5 -->
+                <div class="recommendation-card">
+                    <div class="card-image">
+                        🛍️
+                        <div class="place-type">🛍️ Шоппинг</div>
+                        <button class="favorite-btn">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="card-content">
+                        <h3>Торговый центр "Стиль"</h3>
+                        <p>Более 200 магазинов, фудкорт и кинотеатр. Есть подземная парковка.</p>
+                        <div class="card-actions">
+                            <button class="action-btn secondary-action">
+                                <i class="fas fa-info-circle"></i>
+                                Подробнее
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendation Card 6 -->
+                <div class="recommendation-card">
+                    <div class="card-image">
+                        🎬
+                        <div class="place-type">🎬 Развлечения</div>
+                        <button class="favorite-btn">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="card-content">
+                        <h3>Кинотеатр "Звезда"</h3>
+                        <p>Новейшие фильмы в комфортных залах с системой Dolby Atmos. Есть залы для детей.</p>
+                        <div class="card-actions">
+                            <button class="action-btn secondary-action">
+                                <i class="fas fa-info-circle"></i>
+                                Подробнее
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/recommendations.js"></script>
+</body>
+</html>

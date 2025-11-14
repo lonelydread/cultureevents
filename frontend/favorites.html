@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Избранное - MaxToGo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://st.max.ru/js/max-web-app.js"></script>
+</head>
+<body class="favorites-page">
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html" class="logo-link">
+                    <div class="logo-icon">🌤️</div>
+                    <div class="logo-text">
+                        <span class="logo-primary">Max</span>
+                        <span class="logo-secondary">ToGo</span>
+                    </div>
+                </a>
+            </div>
+            <nav class="main-nav">
+                <a href="recommendations.html" class="nav-link">Рекомендации</a>
+                <a href="favorites.html" class="nav-link active">Избранное</a>
+                <!-- <a href="history.html" class="nav-link">История</a> -->
+                <a href="profile.html" class="nav-link">Профиль</a>
+            </nav>
+            <div class="user-section">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <div class="user-greeting">Привет, <span id="displayName">Друг</span>!</div>
+                        <div class="user-mood" id="userMood">😊 Отличное настроение</div>
+                    </div>
+                </div>
+                <button class="settings-btn" id="settingsBtn">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">Избранное</h1>
+            <p class="page-subtitle">Места, которые вы сохранили</p>
+        </div>
+        
+        <div class="favorites-container">
+            <div class="favorites-stats">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">❤️</div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="totalFavorites">8</div>
+                            <div class="stat-label">Всего в избранном</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📍</div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="nearbyFavorites">5</div>
+                            <div class="stat-label">Рядом с вами</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-info">
+                            <div class="stat-number">4.7</div>
+                            <div class="stat-label">Средний рейтинг</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="favorites-actions">
+                <div class="action-buttons">
+                    <button class="action-btn primary">
+                        <i class="fas fa-share"></i>
+                        Поделиться списком
+                    </button>
+                </div>
+            </div>
+
+            <div class="favorites-grid" id="favoritesGrid">
+                <!-- Favorite Card 1 -->
+                <div class="favorite-card">
+                    <div class="favorite-header">
+                        <div class="place-badge">
+                            <span class="badge-icon">☕</span>
+                            <span class="badge-text">Кафе</span>
+                        </div>
+                        <button class="favorite-remove-btn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="favorite-content">
+                        <h3>Кофейня "Уютный уголок"</h3>
+                        <p class="place-description">Атмосферное место с авторским кофе и домашней выпечкой. Бесплатный Wi-Fi и розетки.</p>
+                        <div class="place-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-walking"></i>
+                                <span>0.5 км</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-star"></i>
+                                <span>4.9</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-clock"></i>
+                                <span>7:00-23:00</span>
+                            </div>
+                        </div>
+                        <div class="place-tags">
+                            <span class="tag">Wi-Fi</span>
+                            <span class="tag">Веганское меню</span>
+                            <span class="tag">Рабочее место</span>
+                        </div>
+                    </div>
+                    <div class="favorite-actions">
+                        <button class="btn-small primary">
+                            <i class="fas fa-route"></i>
+                            Маршрут
+                        </button>
+                        <button class="btn-small outline">
+                            <i class="fas fa-calendar"></i>
+                            Запланировать
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Favorite Card 2 -->
+                <div class="favorite-card">
+                    <div class="favorite-header">
+                        <div class="place-badge">
+                            <span class="badge-icon">🎨</span>
+                            <span class="badge-text">Искусство</span>
+                        </div>
+                        <button class="favorite-remove-btn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="favorite-content">
+                        <h3>Галерея современного искусства</h3>
+                        <p class="place-description">Современные выставки, инсталляции и мастер-классы. Вдохновляющая атмосфера для творческих натур.</p>
+                        <div class="place-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-walking"></i>
+                                <span>0.8 км</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-star"></i>
+                                <span>4.6</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-clock"></i>
+                                <span>11:00-20:00</span>
+                            </div>
+                        </div>
+                        <div class="place-tags">
+                            <span class="tag">Выставки</span>
+                            <span class="tag">Мастер-классы</span>
+                            <span class="tag">Интерактивно</span>
+                        </div>
+                    </div>
+                    <div class="favorite-actions">
+                        <button class="btn-small primary">
+                            <i class="fas fa-route"></i>
+                            Маршрут
+                        </button>
+                        <button class="btn-small outline">
+                            <i class="fas fa-calendar"></i>
+                            Запланировать
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Favorite Card 3 -->
+                <div class="favorite-card">
+                    <div class="favorite-header">
+                        <div class="place-badge">
+                            <span class="badge-icon">🌳</span>
+                            <span class="badge-text">Парк</span>
+                        </div>
+                        <button class="favorite-remove-btn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="favorite-content">
+                        <h3>Центральный парк культуры</h3>
+                        <p class="place-description">Просторный парк с озерами, велодорожками и зонами для пикника. Идеально для активного отдыха.</p>
+                        <div class="place-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-walking"></i>
+                                <span>1.2 км</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-star"></i>
+                                <span>4.8</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-clock"></i>
+                                <span>6:00-23:00</span>
+                            </div>
+                        </div>
+                        <div class="place-tags">
+                            <span class="tag">Велодорожки</span>
+                            <span class="tag">Озеро</span>
+                            <span class="tag">Пикник</span>
+                        </div>
+                    </div>
+                    <div class="favorite-actions">
+                        <button class="btn-small primary">
+                            <i class="fas fa-route"></i>
+                            Маршрут
+                        </button>
+                        <button class="btn-small outline">
+                            <i class="fas fa-calendar"></i>
+                            Запланировать
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Favorite Card 4 -->
+                <div class="favorite-card">
+                    <div class="favorite-header">
+                        <div class="place-badge">
+                            <span class="badge-icon">📚</span>
+                            <span class="badge-text">Библиотека</span>
+                        </div>
+                        <button class="favorite-remove-btn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="favorite-content">
+                        <h3>Библиотека им. Горького</h3>
+                        <p class="place-description">Просторные читальные залы, современный интерьер и богатая коллекция литературы.</p>
+                        <div class="place-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-walking"></i>
+                                <span>1.5 км</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-star"></i>
+                                <span>4.7</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-clock"></i>
+                                <span>9:00-21:00</span>
+                            </div>
+                        </div>
+                        <div class="place-tags">
+                            <span class="tag">Тишина</span>
+                            <span class="tag">Wi-Fi</span>
+                            <span class="tag">Исследования</span>
+                        </div>
+                    </div>
+                    <div class="favorite-actions">
+                        <button class="btn-small primary">
+                            <i class="fas fa-route"></i>
+                            Маршрут
+                        </button>
+                        <button class="btn-small outline">
+                            <i class="fas fa-calendar"></i>
+                            Запланировать
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Favorite Card 5 -->
+                <div class="favorite-card">
+                    <div class="favorite-header">
+                        <div class="place-badge">
+                            <span class="badge-icon">⚽</span>
+                            <span class="badge-text">Спорт</span>
+                        </div>
+                        <button class="favorite-remove-btn">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="favorite-content">
+                        <h3>Спортивный комплекс "Энергия"</h3>
+                        <p class="place-description">Современный фитнес-центр с бассейном, тренажерным залом и групповыми занятиями.</p>
+                        <div class="place-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-walking"></i>
+                                <span>2.1 км</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-star"></i>
+                                <span>4.7</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-clock"></i>
+                                <span>6:00-24:00</span>
+                            </div>
+                        </div>
+                        <div class="place-tags">
+                            <span class="tag">Бассейн</span>
+                            <span class="tag">Тренажеры</span>
+                            <span class="tag">Групповые занятия</span>
+                        </div>
+                    </div>
+                    <div class="favorite-actions">
+                        <button class="btn-small primary">
+                            <i class="fas fa-route"></i>
+                            Маршрут
+                        </button>
+                        <button class="btn-small outline">
+                            <i class="fas fa-calendar"></i>
+                            Запланировать
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State (hidden when there are favorites) -->
+            <div class="empty-state hidden" id="emptyFavorites">
+                <div class="empty-icon">❤️</div>
+                <h3>Пока пусто</h3>
+                <p>Сохраняйте понравившиеся места, чтобы вернуться к ним позже</p>
+                <a href="recommendations.html" class="btn-primary" id="exploreFavoritesBtn">
+                    <i class="fas fa-compass"></i>
+                    Найти места
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/favorites.js"></script>
+</body>
+</html>

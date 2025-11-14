@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История - MaxToGo</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://st.max.ru/js/max-web-app.js"></script>
+</head>
+<body class="history-page">
+    <!-- Header -->
+    <!-- <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html" class="logo-link">
+                    <div class="logo-icon">🌤️</div>
+                    <div class="logo-text">
+                        <span class="logo-primary">Max</span>
+                        <span class="logo-secondary">ToGo</span>
+                    </div>
+                </a>
+            </div>
+            <nav class="main-nav">
+                <a href="recommendations.html" class="nav-link">Рекомендации</a>
+                <a href="favorites.html" class="nav-link">Избранное</a>
+                <a href="history.html" class="nav-link active">История</a>
+                <a href="profile.html" class="nav-link">Профиль</a>
+            </nav>
+            <div class="user-section">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <div class="user-greeting">Привет, <span id="displayName">Друг</span>!</div>
+                        <div class="user-mood" id="userMood">😊 Отличное настроение</div>
+                    </div>
+                </div>
+                <button class="settings-btn" id="settingsBtn">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+        </div>
+    </header> -->
+
+    <!-- Main Content -->
+    <!-- <main class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">История посещений</h1>
+            <p class="page-subtitle">Места, которые вы уже посетили</p>
+        </div>
+        
+        <div class="history-container"> -->
+            <!-- History Stats -->
+            <!-- <div class="history-stats">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="totalVisits">24</div>
+                            <div class="stat-label">Всего посещений</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⭐</div>
+                        <div class="stat-info">
+                            <div class="stat-number">4.3</div>
+                            <div class="stat-label">Средняя оценка</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🏆</div>
+                        <div class="stat-info">
+                            <div class="stat-number">12</div>
+                            <div class="stat-label">Уникальных мест</div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- Timeline Navigation -->
+            <!-- <div class="timeline-nav">
+                <div class="timeline-filters">
+                    <button class="timeline-filter active" data-period="all">Все время</button>
+                    <button class="timeline-filter" data-period="month">Этот месяц</button>
+                    <button class="timeline-filter" data-period="week">Эта неделя</button>
+                    <button class="timeline-filter" data-period="today">Сегодня</button>
+                </div>
+                <div class="timeline-actions">
+                    <button class="action-btn outline">
+                        <i class="fas fa-download"></i>
+                        Экспорт
+                    </button>
+                    <button class="action-btn outline">
+                        <i class="fas fa-trash"></i>
+                        Очистить историю
+                    </button>
+                </div>
+            </div> -->
+
+            <!-- History Timeline -->
+            <!-- <div class="history-timeline"> -->
+                <!-- Today Section -->
+                <!-- <div class="timeline-section">
+                    <div class="timeline-header">
+                        <h3 class="timeline-date">Сегодня</h3>
+                        <span class="visits-count">2 посещения</span>
+                    </div>
+                    <div class="timeline-items"> -->
+                        <!-- Visit 1 -->
+                        <!-- <div class="timeline-item">
+                            <div class="timeline-marker">
+                                <div class="marker-icon">☕</div>
+                                <div class="timeline-line"></div>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="visit-card">
+                                    <div class="visit-header">
+                                        <h4>Кофейня "Уютный уголок"</h4>
+                                        <div class="visit-time">14:30</div>
+                                    </div>
+                                    <div class="visit-details">
+                                        <div class="visit-rating">
+                                            <div class="stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <span class="rating-text">5.0</span>
+                                        </div>
+                                        <p class="visit-notes">Отличный кофе и уютная атмосфера. Обязательно вернусь!</p>
+                                        <div class="visit-tags">
+                                            <span class="tag">Работа</span>
+                                            <span class="tag">Встреча</span>
+                                        </div>
+                                    </div>
+                                    <div class="visit-actions">
+                                        <button class="btn-small outline">
+                                            <i class="fas fa-redo"></i>
+                                            Посетить снова
+                                        </button>
+                                        <button class="btn-small outline">
+                                            <i class="fas fa-edit"></i>
+                                            Редактировать
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <!-- Visit 2 -->
+                        <!-- <div class="timeline-item">
+                            <div class="timeline-marker">
+                                <div class="marker-icon">🌳</div>
+                                <div class="timeline-line"></div>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="visit-card">
+                                    <div class="visit-header">
+                                        <h4>Центральный парк культуры</h4>
+                                        <div class="visit-time">11:00</div>
+                                    </div>
+                                    <div class="visit-details">
+                                        <div class="visit-rating">
+                                            <div class="stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star-half-alt"></i>
+                                            </div>
+                                            <span class="rating-text">4.5</span>
+                                        </div>
+                                        <p class="visit-notes">Прекрасное место для утренней пробежки. Чистый воздух и красивые виды.</p>
+                                        <div class="visit-tags">
+                                            <span class="tag">Спорт</span>
+                                            <span class="tag">Отдых</span>
+                                        </div>
+                                    </div>
+                                    <div class="visit-actions">
+                                        <button class="btn-small outline">
+                                            <i class="fas fa-redo"></i>
+                                            Посетить снова
+                                        </button>
+                                        <button class="btn-small outline">
+                                            <i class="fas fa-edit"></i>
+                                            Редактировать
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- Yesterday Section -->
+                <!-- <div class="timeline-section">
+                    <div class="timeline-header">
+                        <h3 class="timeline-date">Вчера</h3>
+                        <span class="visits-count">3 посещения</span>
+                    </div>
+                    <div class="timeline-items"> -->
+                        <!-- Visit 1 -->
+                        <!-- <div class="timeline-item">
+                            <div class="timeline-marker">
+                                <div class="marker-icon">🎬</div>
+                                <div class="timeline-line"></div>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="visit-card">
+                                    <div class="visit-header">
+                                        <h4>Кинотеатр "Звезда"</h4>
+                                        <div class="visit-time">20:15</div>
+                                    </div>
+                                    <div class="visit-details">
+                                        <div class="visit-rating">
+                                            <div class="stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                            </div>
+                                            <span class="rating-text">4.0</span>
+                                        </div>
+                                        <p class="visit-notes">Посмотрели новый блокбастер. Отличный звук и комфортные кресла.</p>
+                                        <div class="visit-tags">
+                                            <span class="tag">Развлечения</span>
+                                            <span class="tag">Свидание</span>
+                                        </div>
+                                    </div>
+                                    <div class="visit-actions">
+                                        <button class="btn-small outline">
+                                            <i class="fas fa-redo"></i>
+                                            Посетить снова
+                                        </button>
+                                        <button class="btn-small outline">
+                                            <i class="fas fa-edit"></i>
+                                            Редактировать
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <!-- Visit 2 -->
+                        <!-- <div class="timeline-item">
+                            <div class="timeline-marker">
+                                <div class="marker-icon">🍕</div>
+                                <div class="timeline-line"></div>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="visit-card">
+                                    <div class="visit-header">
+                                        <h4>Пиццерия "Итальянский уголок"</h4>
+                                        <div class="visit-time">18:30</div>
+                                    </div>
+                                    <div class="visit-details">
+                                        <div class="visit-rating">
+                                            <div class="stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <span class="rating-text">5.0</span>
+                                        </div>
+                                        <p class="visit-notes">Вкуснейшая пицца и дружелюбный персонал. Отличное место для ужина с друзьями.</p>
+                                        <div class="visit-tags">
+                                            <span class="tag">Ужин</span>
+                                            <span class="tag">Компания</span>
+                                        </div>
+                                    </div>
+                                    <div class="visit-actions">
+                                        <button class="btn-small outline">
+                                            <i class="fas fa-redo"></i>
+                                            Посетить снова
+                                        </button>
+                                        <button class="btn-small outline">
+                                            <i class="fas fa-edit"></i>
+                                            Редактировать
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- This Week Section -->
+                <!-- <div class="timeline-section">
+                    <div class="timeline-header">
+                        <h3 class="timeline-date">На этой неделе</h3>
+                        <span class="visits-count">8 посещений</span>
+                    </div>
+                    <div class="timeline-items"> -->
+                        <!-- Visit 1 -->
+                        <!-- <div class="timeline-item">
+                            <div class="timeline-marker">
+                                <div class="marker-icon">📚</div>
+                                <div class="timeline-line"></div>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="visit-card">
+                                    <div class="visit-header">
+                                        <h4>Библиотека им. Горького</h4>
+                                        <div class="visit-time">Понедельник, 15:00</div>
+                                    </div>
+                                    <div class="visit-details">
+                                        <div class="visit-rating">
+                                            <div class="stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                            </div>
+                                            <span class="rating-text">4.0</span>
+                                        </div>
+                                        <p class="visit-notes">Тихое место для работы. Удобные рабочие места и хороший Wi-Fi.</p>
+                                        <div class="visit-tags">
+                                            <span class="tag">Работа</span>
+                                            <span class="tag">Учеба</span>
+                                        </div>
+                                    </div>
+                                    <div class="visit-actions">
+                                        <button class="btn-small outline">
+                                            <i class="fas fa-redo"></i>
+                                            Посетить снова
+                                        </button>
+                                        <button class="btn-small outline">
+                                            <i class="fas fa-edit"></i>
+                                            Редактировать
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- Empty State -->
+            <!-- <div class="empty-state hidden" id="emptyHistory">
+                <div class="empty-icon">📝</div>
+                <h3>История пуста</h3>
+                <p>Здесь появятся места, которые вы посетите</p>
+                <a href="recommendations.html" class="btn-primary">
+                    <i class="fas fa-compass"></i>
+                    Найти места
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/history.js"></script> -->
+</body>
+</html>

@@ -16,6 +16,4 @@ public class EventResponse {
     private String location;
     private BigDecimal price;
     private String imageUrl;
-    private String mood;
-    private String audience;
 }
