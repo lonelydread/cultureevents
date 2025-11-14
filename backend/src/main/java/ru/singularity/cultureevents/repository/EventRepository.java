@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
-    List<Event> findByCityAndDateAfter(String city, LocalDateTime date);
+    List<Event> findByCityAndDateAfterOrderByDateAsc(String city, LocalDateTime date);
 //    List<Event> findByCityAndCategoryAndDateAfter(
 //            String city, String category, LocalDateTime date);
 //    List<Event> findByCategoryAndDateAfter(String category, LocalDateTime date);

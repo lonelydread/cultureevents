@@ -1,7 +1,8 @@
 package ru.singularity.cultureevents.model;
 
-import lombok.Data;
 import jakarta.persistence.*;
+import lombok.Data;
+import ru.singularity.cultureevents.converter.StringArrayConverter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -21,12 +22,16 @@ public class Event {
     private String description;
 
     @Column(nullable = false)
-    private String category; // concert, exhibition, theater, festival, standup
+    private String category;
+
+    @Convert(converter = StringArrayConverter.class)
+    @Column(columnDefinition = "text[]")
+    private String[] categories; // concert, exhibition, theater, festival, standup
 
     @Column(nullable = false)
     private String city;
 
-    @Column(nullable = false)
+
     private LocalDateTime date;
 
 
@@ -35,7 +40,17 @@ public class Event {
     private String imageUrl;
 
     // Поля для системы рекомендаций
-    private String mood; // active, chill, cultural
-    private String audience; // friends, couples, family, solo
+    @Convert(converter = StringArrayConverter.class)
+    @Column(columnDefinition = "text[]")
+    private String[] moods; // active, chill, cultural
+
+
+    @Convert(converter = StringArrayConverter.class)
+    @Column(columnDefinition = "text[]")
+    private String[] audiences; // friends, couples, family, solo
+
+    @Convert(converter = StringArrayConverter.class)
+    @Column(columnDefinition = "text[]")
+    private String[] weather;
 
 }

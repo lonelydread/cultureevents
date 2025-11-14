@@ -2,9 +2,9 @@
 class SurveyManager {
     constructor() {
         this.currentStep = 1;
-        this.totalSteps = 5; // Было 6, теперь 5
+        this.totalSteps = 5;
         this.userData = {
-            name: 'Друг', // Устанавливаем имя по умолчанию
+            name: 'Друг',
             mood: '',
             weather: '',
             interests: []
@@ -58,6 +58,12 @@ class SurveyManager {
             option.addEventListener('click', (e) => {
                 this.toggleInterest(e.target.closest('.interest-option'));
             });
+        });
+
+        // Show recommendations button (последняя карточка)
+        document.querySelector('.show-main')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.sendRecommendationsRequest();
         });
 
         // Swipe gestures for mobile
@@ -159,6 +165,105 @@ class SurveyManager {
     saveUserData() {
         localStorage.setItem('userData', JSON.stringify(this.userData));
         console.log('User data saved:', this.userData);
+    }
+
+    async sendRecommendationsRequest() {
+        try {
+            // Показываем индикатор загрузки
+            this.showLoadingState();
+            
+            // Подготавливаем данные для отправки
+            const requestData = {
+                city: this.userData.city || "Москва", // Добавляем город по умолчанию
+                favoriteCategories: this.userData.interests,
+                preferredMood: this.userData.mood
+            };
+
+            console.log('Sending request to backend:', requestData);
+
+            // Отправляем POST запрос на бэкенд
+            const response = await fetch('http://localhost:8080/api/events/recommendations', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData)
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const recommendations = await response.json();
+            console.log('Received recommendations:', recommendations);
+
+            // Сохраняем рекомендации в localStorage для использования на странице рекомендаций
+            localStorage.setItem('recommendations', JSON.stringify(recommendations));
+
+            // Перенаправляем на страницу рекомендаций
+            window.location.href = 'recommendations.html';
+
+        } catch (error) {
+            console.error('Error fetching recommendations:', error);
+            
+            // Показываем сообщение об ошибке
+            this.showError('Не удалось загрузить рекомендации. Пожалуйста, попробуйте позже.');
+            
+            // Все равно перенаправляем на страницу рекомендаций (с демо-данными)
+            setTimeout(() => {
+                window.location.href = 'recommendations.html';
+            }, 2000);
+        }
+    }
+
+    showLoadingState() {
+        const button = document.querySelector('.show-main');
+        if (button) {
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Загрузка...';
+            button.disabled = true;
+            
+            // Восстанавливаем кнопку через 5 секунд на случай ошибки
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.disabled = false;
+            }, 5000);
+        }
+    }
+
+    showError(message) {
+        // Создаем элемент для отображения ошибки
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'feedback feedback-error';
+        errorDiv.innerHTML = `
+            <span>${message}</span>
+            <button onclick="this.parentElement.remove()">&times;</button>
+        `;
+        
+        errorDiv.style.cssText = `
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: #f44336;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideInRight 0.3s ease;
+        `;
+        
+        document.body.appendChild(errorDiv);
+        
+        // Автоматически удаляем через 5 секунд
+        setTimeout(() => {
+            if (errorDiv.parentElement) {
+                errorDiv.remove();
+            }
+        }, 5000);
     }
 
     setupSwipeGestures() {

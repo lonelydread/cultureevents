@@ -17,8 +17,6 @@ public class EventMapper {
         response.setLocation(event.getLocation());
         response.setPrice(event.getPrice());
         response.setImageUrl(event.getImageUrl());
-        response.setMood(event.getMood());
-        response.setAudience(event.getAudience());
         return response;
     }
 }
