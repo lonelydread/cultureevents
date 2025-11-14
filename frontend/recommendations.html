@@ -24,7 +24,7 @@
             <nav class="main-nav">
                 <a href="recommendations.html" class="nav-link active">Рекомендации</a>
                 <a href="favorites.html" class="nav-link">Избранное</a>
-                <a href="history.html" class="nav-link">История</a>
+                <!-- <a href="history.html" class="nav-link">История</a> -->
                 <a href="profile.html" class="nav-link">Профиль</a>
             </nav>
             <div class="user-section">
@@ -62,7 +62,7 @@
         </section>
 
         <!-- Filters Section -->
-        <section class="filters-section">
+        <!-- <section class="filters-section">
             <div class="filters-header">
                 <h2>Уточните поиск</h2>
                 <button class="filter-reset">Сбросить всё</button>
@@ -105,16 +105,15 @@
                     </select>
                 </div>
             </div>
-        </section>
+        </section> -->
 
         <!-- Recommendations Section -->
         <section class="recommendation-section">
             <div class="section-header">
                 <h2 class="section-title">Персональные рекомендации</h2>
-                <div class="results-count">Найдено <span id="resultsCount">12</span> мест</div>
             </div>
 
-            <div class="recommendations-grid" id="recommendationsGrid">
+            <div class="recommendations-grid">
                 <!-- Recommendation Card 1 -->
                 <div class="recommendation-card">
                     <div class="card-image">
@@ -127,25 +126,7 @@
                     <div class="card-content">
                         <h3>Центральный парк культуры</h3>
                         <p>Просторный парк с озерами, велодорожками и зонами для пикника. Идеально для активного отдыха.</p>
-                        <div class="card-details">
-                            <div class="detail-item">
-                                <i class="fas fa-walking"></i>
-                                <span>1.2 км</span>
-                            </div>
-                            <div class="detail-item">
-                                <i class="fas fa-star"></i>
-                                <span>4.8</span>
-                            </div>
-                            <div class="detail-item">
-                                <i class="fas fa-clock"></i>
-                                <span>6:00-23:00</span>
-                            </div>
-                        </div>
                         <div class="card-actions">
-                            <button class="action-btn primary-action">
-                                <i class="fas fa-route"></i>
-                                Маршрут
-                            </button>
                             <button class="action-btn secondary-action">
                                 <i class="fas fa-info-circle"></i>
                                 Подробнее
@@ -166,25 +147,7 @@
                     <div class="card-content">
                         <h3>Галерея современного искусства</h3>
                         <p>Современные выставки, инсталляции и мастер-классы. Вдохновляющая атмосфера для творческих натур.</p>
-                        <div class="card-details">
-                            <div class="detail-item">
-                                <i class="fas fa-walking"></i>
-                                <span>0.8 км</span>
-                            </div>
-                            <div class="detail-item">
-                                <i class="fas fa-star"></i>
-                                <span>4.6</span>
-                            </div>
-                            <div class="detail-item">
-                                <i class="fas fa-clock"></i>
-                                <span>11:00-20:00</span>
-                            </div>
-                        </div>
                         <div class="card-actions">
-                            <button class="action-btn primary-action">
-                                <i class="fas fa-route"></i>
-                                Маршрут
-                            </button>
                             <button class="action-btn secondary-action">
                                 <i class="fas fa-info-circle"></i>
                                 Подробнее
@@ -205,25 +168,7 @@
                     <div class="card-content">
                         <h3>Кофейня "Уютный уголок"</h3>
                         <p>Атмосферное место с авторским кофе и домашней выпечкой. Бесплатный Wi-Fi и розетки.</p>
-                        <div class="card-details">
-                            <div class="detail-item">
-                                <i class="fas fa-walking"></i>
-                                <span>0.5 км</span>
-                            </div>
-                            <div class="detail-item">
-                                <i class="fas fa-star"></i>
-                                <span>4.9</span>
-                            </div>
-                            <div class="detail-item">
-                                <i class="fas fa-clock"></i>
-                                <span>7:00-23:00</span>
-                            </div>
-                        </div>
                         <div class="card-actions">
-                            <button class="action-btn primary-action">
-                                <i class="fas fa-route"></i>
-                                Маршрут
-                            </button>
                             <button class="action-btn secondary-action">
                                 <i class="fas fa-info-circle"></i>
                                 Подробнее
@@ -244,25 +189,7 @@
                     <div class="card-content">
                         <h3>Спортивный комплекс "Энергия"</h3>
                         <p>Современный фитнес-центр с бассейном, тренажерным залом и групповыми занятиями.</p>
-                        <div class="card-details">
-                            <div class="detail-item">
-                                <i class="fas fa-walking"></i>
-                                <span>2.1 км</span>
-                            </div>
-                            <div class="detail-item">
-                                <i class="fas fa-star"></i>
-                                <span>4.7</span>
-                            </div>
-                            <div class="detail-item">
-                                <i class="fas fa-clock"></i>
-                                <span>6:00-24:00</span>
-                            </div>
-                        </div>
                         <div class="card-actions">
-                            <button class="action-btn primary-action">
-                                <i class="fas fa-route"></i>
-                                Маршрут
-                            </button>
                             <button class="action-btn secondary-action">
                                 <i class="fas fa-info-circle"></i>
                                 Подробнее
@@ -283,25 +210,7 @@
                     <div class="card-content">
                         <h3>Торговый центр "Стиль"</h3>
                         <p>Более 200 магазинов, фудкорт и кинотеатр. Есть подземная парковка.</p>
-                        <div class="card-details">
-                            <div class="detail-item">
-                                <i class="fas fa-walking"></i>
-                                <span>3.2 км</span>
-                            </div>
-                            <div class="detail-item">
-                                <i class="fas fa-star"></i>
-                                <span>4.5</span>
-                            </div>
-                            <div class="detail-item">
-                                <i class="fas fa-clock"></i>
-                                <span>10:00-22:00</span>
-                            </div>
-                        </div>
                         <div class="card-actions">
-                            <button class="action-btn primary-action">
-                                <i class="fas fa-route"></i>
-                                Маршрут
-                            </button>
                             <button class="action-btn secondary-action">
                                 <i class="fas fa-info-circle"></i>
                                 Подробнее
@@ -322,25 +231,7 @@
                     <div class="card-content">
                         <h3>Кинотеатр "Звезда"</h3>
                         <p>Новейшие фильмы в комфортных залах с системой Dolby Atmos. Есть залы для детей.</p>
-                        <div class="card-details">
-                            <div class="detail-item">
-                                <i class="fas fa-walking"></i>
-                                <span>1.8 км</span>
-                            </div>
-                            <div class="detail-item">
-                                <i class="fas fa-star"></i>
-                                <span>4.4</span>
-                            </div>
-                            <div class="detail-item">
-                                <i class="fas fa-clock"></i>
-                                <span>9:00-2:00</span>
-                            </div>
-                        </div>
                         <div class="card-actions">
-                            <button class="action-btn primary-action">
-                                <i class="fas fa-route"></i>
-                                Маршрут
-                            </button>
                             <button class="action-btn secondary-action">
                                 <i class="fas fa-info-circle"></i>
                                 Подробнее
@@ -351,46 +242,6 @@
             </div>
         </section>
     </main>
-
-    <!-- Footer -->
-    <footer class="main-footer">
-        <div class="footer-container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>MaxToGo</h3>
-                    <p>Персональный гид по вашему городу. Находите лучшие места для отдыха на основе вашего настроения и предпочтений.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Навигация</h4>
-                    <ul>
-                        <li><a href="index.html">Главная</a></li>
-                        <li><a href="recommendations.html">Рекомендации</a></li>
-                        <li><a href="favorites.html">Избранное</a></li>
-                        <li><a href="history.html">История</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Поддержка</h4>
-                    <ul>
-                        <li><a href="faq.html">Частые вопросы</a></li>
-                        <li><a href="contact.html">Контакты</a></li>
-                        <li><a href="privacy.html">Политика конфиденциальности</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Следите за нами</h4>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-vk"></i></a>
-                        <a href="#"><i class="fab fa-telegram"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 MaxToGo. Все права защищены.</p>
-            </div>
-        </div>
-    </footer>
 
     <script src="js/recommendations.js"></script>
 </body>
