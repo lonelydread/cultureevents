@@ -80,7 +80,6 @@ class RecommendationsManager {
                 this.getTypeIcon(event.category)
             }
                 <div class="place-type">${this.getTypeText(event.category)}</div>
-                ${event.price ? `<div class="event-price">${this.formatPrice(event.price)}</div>` : ''}
                 <button class="favorite-btn" onclick="recommendationsManager.toggleFavorite(${event.id || index})">
                     <i class="fas ${this.isFavorite(event.id || index) ? 'fa-heart' : 'fa-heart'}"></i>
                 </button>
@@ -135,7 +134,7 @@ class RecommendationsManager {
     }
 
     formatDate(dateString) {
-        if (!dateString) return 'Дата не указана';
+        if (!dateString) return '-';
 
         try {
             const date = new Date(dateString);
@@ -147,12 +146,12 @@ class RecommendationsManager {
             });
         } catch (e) {
             console.warn('Error formatting date:', e);
-            return 'Дата не указана';
+            return '-';
         }
     }
 
     formatTime(dateString) {
-        if (!dateString) return 'Время не указано';
+        if (!dateString) return '-';
 
         try {
             const date = new Date(dateString);
@@ -162,7 +161,7 @@ class RecommendationsManager {
             });
         } catch (e) {
             console.warn('Error formatting time:', e);
-            return 'Время не указано';
+            return '-';
         }
     }
 
