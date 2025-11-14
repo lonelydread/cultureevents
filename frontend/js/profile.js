@@ -167,7 +167,7 @@ class ProfileManager {
         const visitedPlaces = document.getElementById('visitedPlaces');
         if (visitedPlaces) {
             // In real app, this would come from history
-            visitedPlaces.textContent = '24';
+            visitedPlaces.textContent = '0';
         }
 
         // Favorites count
@@ -180,7 +180,7 @@ class ProfileManager {
         // Days active (mock data)
         const daysActive = document.getElementById('daysActive');
         if (daysActive) {
-            daysActive.textContent = '127';
+            daysActive.textContent = '1';
         }
     }
 

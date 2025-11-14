@@ -4,10 +4,11 @@ class SurveyManager {
         this.currentStep = 1;
         this.totalSteps = 5;
         this.userData = {
-            name: 'Друг',
+            name: 'Гость',
             mood: '',
             weather: '',
-            interests: []
+            interests: [],
+            city: 'Москва' // по умолчанию
         };
         this.init();
     }
@@ -15,7 +16,9 @@ class SurveyManager {
     init() {
         this.bindEvents();
         this.updateProgress();
+        this.detectUserCity();
     }
+
 
     bindEvents() {
         // Start survey button
@@ -154,7 +157,7 @@ class SurveyManager {
         this.showLoadingState();
 
         const requestData = {
-            city: "Москва",
+            city: this.userData.city,
             favoriteCategories: this.userData.interests,
             preferredMood: this.userData.mood,
             weather: this.userData.weather

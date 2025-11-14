@@ -30,7 +30,7 @@ public class EventService {
 
             if (request.getWeather().equals("rainy") || request.getWeather().equals("snowy")) {
                 baseEvents = baseEvents.stream()
-                        .filter(Event::isWeather_dependent)
+                        .filter(p-> !p.isWeather_dependent())
                         .toList();
             }
 
@@ -45,7 +45,7 @@ public class EventService {
                     double similarity = recommendationEngine.cosineSimilarity(userVector, eventVector);
                     return new ScoredEvent(event, similarity);
                 })
-                .collect(Collectors.toList());
+                .toList();
 
         // 4. Фильтруем и сортируем по схожести
         return scoredEvents.stream()

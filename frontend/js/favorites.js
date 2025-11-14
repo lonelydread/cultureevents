@@ -2,6 +2,7 @@
 class FavoritesManager {
     constructor() {
         this.favorites = [];
+        this.favoritesData = [];
         this.init();
     }
 
@@ -45,116 +46,169 @@ class FavoritesManager {
 
     loadFavorites() {
         this.favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-        this.renderFavorites();
-        this.toggleEmptyState();
+        this.loadFavoritesData().then(() => {
+            this.renderFavorites();
+            this.toggleEmptyState();
+        });
+    }
+
+    async loadFavoritesData() {
+        try {
+            if (this.favorites.length === 0) {
+                this.favoritesData = [];
+                return;
+            }
+
+            // Загружаем рекомендации из localStorage
+            const recommendations = JSON.parse(localStorage.getItem('recommendations') || '[]');
+            
+            // Фильтруем рекомендации по ID избранных
+            this.favoritesData = recommendations.filter(place => 
+                this.favorites.includes(place.id)
+            );
+
+            console.log('Loaded favorites data:', this.favoritesData);
+
+        } catch (error) {
+            console.error('Error loading favorites data:', error);
+            this.favoritesData = [];
+        }
     }
 
     renderFavorites() {
         const grid = document.getElementById('favoritesGrid');
         if (!grid) return;
 
-        const favoritesData = this.getFavoritesData();
-        
-        grid.innerHTML = favoritesData.map(place => `
-            <div class="favorite-card" data-id="${place.id}">
-                <div class="favorite-header">
-                    <div class="place-badge">
-                        <span class="badge-icon">${this.getTypeIcon(place.type)}</span>
-                        <span class="badge-text">${this.getTypeText(place.type)}</span>
-                    </div>
-                    <button class="favorite-remove-btn" onclick="favoritesManager.removeFavorite(${place.id})">
-                        <i class="fas fa-times"></i>
+        console.log('Rendering favorites:', this.favoritesData);
+
+        if (this.favoritesData.length === 0) {
+            grid.innerHTML = '';
+            return;
+        }
+
+        grid.innerHTML = this.favoritesData.map((event, index) => `
+            <div class="recommendation-card" data-id="${event.id || index}">
+                <div class="card-image">
+                    ${event.imageUrl ?
+                    `<img src="${event.imageUrl}" alt="${event.title}" onerror="this.style.display='none'">` :
+                    this.getTypeIcon(event.category)
+                    }
+                    <div class="place-type">${this.getTypeText(event.category)}</div>
+                    <button class="favorite-btn" onclick="favoritesManager.removeFavorite(${event.id || index})">
+                        <i class="fas fa-heart"></i>
                     </button>
                 </div>
-                <div class="favorite-content">
-                    <h3>${place.name}</h3>
-                    <p class="place-description">${place.description}</p>
-                    <div class="place-meta">
-                        <div class="meta-item">
-                            <i class="fas fa-walking"></i>
-                            <span>${place.distance} км</span>
+                <div class="card-content">
+                    <h3>${event.title || `Событие ${index + 1}`}</h3>
+                    <p>${event.description || 'Интересное событие для посещения'}</p>
+                    
+                    <!-- Блок даты и времени -->
+                    <div class="event-time-info">
+                        <div class="time-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>${this.formatDate(event.date)}</span>
                         </div>
-                        <div class="meta-item">
-                            <i class="fas fa-star"></i>
-                            <span>${place.rating}</span>
-                        </div>
-                        <div class="meta-item">
+                        <div class="time-item">
                             <i class="fas fa-clock"></i>
-                            <span>${place.hours}</span>
+                            <span>${this.formatTime(event.date)}</span>
                         </div>
+                        ${event.location ? `
+                        <div class="time-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>${event.location}</span>
+                        </div>
+                        ` : ''}
                     </div>
-                    <div class="place-tags">
-                        ${place.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    
+                    <div class="card-details">
+                        <div class="detail-item">
+                            <i class="fas fa-tag"></i>
+                            <span>${this.getTypeText(event.category)}</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>${event.city || 'Москва'}</span>
+                        </div>
+                        ${event.price ? `
+                        <div class="detail-item">
+                            <i class="fas fa-ruble-sign"></i>
+                            <span>${this.formatPrice(event.price)}</span>
+                        </div>
+                        ` : ''}
                     </div>
-                </div>
-                <div class="favorite-actions">
-                    <button class="btn-small primary" onclick="favoritesManager.showRoute(${place.id})">
-                        <i class="fas fa-route"></i>
-                        Маршрут
-                    </button>
-                    <button class="btn-small outline" onclick="favoritesManager.scheduleVisit(${place.id})">
-                        <i class="fas fa-calendar"></i>
-                        Запланировать
-                    </button>
+                    <div class="card-actions">
+                        <button class="action-btn secondary-action" onclick="favoritesManager.showDetails(${event.id || index})">
+                            <i class="fas fa-info-circle"></i>
+                            Подробнее
+                        </button>
+                    </div>
                 </div>
             </div>
         `).join('');
     }
 
-    async getFavoritesData() {
-    try {
-        if (this.favorites.length === 0) {
-            return [];
+    formatDate(dateString) {
+        if (!dateString) return '-';
+
+        try {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('ru-RU', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+                weekday: 'long'
+            });
+        } catch (e) {
+            console.warn('Error formatting date:', e);
+            return '-';
         }
-
-        // Отправляем один запрос со списком ID
-        const response = await fetch('http://localhost:8080/api/places/favorites', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                placeIds: this.favorites
-            })
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const placesData = await response.json();
-        
-        // Преобразуем все данные разом
-        return placesData.map(place => this.transformPlaceData(place));
-        
-    } catch (error) {
-        console.error('Error loading favorites from API:', error);
-        this.showFeedback('Ошибка загрузки избранного', 'error');
-        return this.getFallbackData(); // Fallback на демо-данные
     }
-}
 
-    getTypeIcon(type) {
+    formatTime(dateString) {
+        if (!dateString) return '-';
+
+        try {
+            const date = new Date(dateString);
+            return date.toLocaleTimeString('ru-RU', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        } catch (e) {
+            console.warn('Error formatting time:', e);
+            return '-';
+        }
+    }
+
+    formatPrice(price) {
+        if (price === 0 || price === '0') {
+            return 'Бесплатно';
+        }
+        return `${price} ₽`;
+    }
+
+    getTypeIcon(category) {
         const icons = {
-            cafe: '☕',
+            nature: '🌳',
             art: '🎨',
-            park: '🌳',
-            library: '📚',
+            culture: '🎭',
             sports: '⚽',
-            shopping: '🛍️',
+            science: '🔬',
+            music: '🎵',
+            cafe: '☕',
             entertainment: '🎬'
         };
-        return icons[type] || '📍';
+        return icons[category] || '📍';
     }
 
     getTypeText(type) {
         const types = {
-            cafe: 'Кафе',
+            nature: 'Природа',
             art: 'Искусство',
-            park: 'Парк',
-            library: 'Библиотека',
+            culture: 'Культура',
             sports: 'Спорт',
-            shopping: 'Шоппинг',
+            science: 'Наука',
+            music: 'Музыка',
+            cafe: 'Кафе',
             entertainment: 'Развлечения'
         };
         return types[type] || 'Место';
@@ -181,49 +235,61 @@ class FavoritesManager {
         this.favorites = this.favorites.filter(id => id !== placeId);
         localStorage.setItem('favorites', JSON.stringify(this.favorites));
         
-        this.renderFavorites();
-        this.updateStats();
-        this.toggleEmptyState();
+        // Обновляем данные и перерисовываем
+        this.loadFavoritesData().then(() => {
+            this.renderFavorites();
+            this.updateStats();
+            this.toggleEmptyState();
+        });
         
         this.showFeedback('Убрано из избранного', 'info');
     }
 
     updateStats() {
-        const favoritesData = this.getFavoritesData();
         const totalFavorites = document.getElementById('totalFavorites');
         
         if (totalFavorites) {
-            totalFavorites.textContent = favoritesData.length;
+            totalFavorites.textContent = this.favoritesData.length;
         }
-        
     }
 
     toggleEmptyState() {
         const emptyState = document.getElementById('emptyFavorites');
         const favoritesGrid = document.getElementById('favoritesGrid');
+        const stats = document.querySelector('.favorites-stats');
+        const actions = document.querySelector('.favorites-actions');
         
-        if (emptyState && favoritesGrid) {
-            if (this.favorites.length === 0) {
+        if (emptyState && favoritesGrid && stats && actions) {
+            if (this.favoritesData.length === 0) {
                 emptyState.classList.remove('hidden');
                 favoritesGrid.classList.add('hidden');
+                stats.classList.add('hidden');
+                actions.classList.add('hidden');
             } else {
                 emptyState.classList.add('hidden');
                 favoritesGrid.classList.remove('hidden');
+                stats.classList.remove('hidden');
+                actions.classList.remove('hidden');
             }
         }
     }
 
+    showDetails(placeId) {
+        const place = this.favoritesData.find(p => p.id === placeId);
+        if (place) {
+            this.showFeedback(`Подробная информация о "${place.title}"`, 'info');
+        }
+    }
+
     shareFavorites() {
-        const favoritesData = this.getFavoritesData();
-        if (favoritesData.length === 0) {
+        if (this.favoritesData.length === 0) {
             this.showFeedback('Добавьте места в избранное, чтобы поделиться списком', 'info');
             return;
         }
 
         const shareText = `Мои избранные места в MaxToGo:\n\n` +
-            favoritesData.map(place => `📍 ${place.name} (${place.distance} км)`).join('\n');
+            this.favoritesData.map(place => `📍 ${place.title}`).join('\n');
         
-        // In a real app, this would use the Web Share API
         if (navigator.share) {
             navigator.share({
                 title: 'Мои избранные места - MaxToGo',
@@ -231,7 +297,6 @@ class FavoritesManager {
                 url: window.location.href
             });
         } else {
-            // Fallback: copy to clipboard
             navigator.clipboard.writeText(shareText).then(() => {
                 this.showFeedback('Список избранного скопирован в буфер обмена', 'success');
             });
@@ -248,22 +313,6 @@ class FavoritesManager {
         feedback.innerHTML = `
             <span>${message}</span>
             <button onclick="this.parentElement.remove()">&times;</button>
-        `;
-        
-        feedback.style.cssText = `
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            background: ${type === 'success' ? '#4CAF50' : '#2196F3'};
-            color: white;
-            padding: 12px 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 10000;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            animation: slideInRight 0.3s ease;
         `;
         
         document.body.appendChild(feedback);

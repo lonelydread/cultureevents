@@ -32,11 +32,22 @@ class RecommendationsManager {
     }
 
     loadUserData() {
-        const userData = localStorage.getItem('userData');
-        if (userData) {
-            const data = JSON.parse(userData);
-            this.updateUserInfo(data);
+        try {
+            const userData = localStorage.getItem('userData');
+            if (userData) {
+                this.userData = JSON.parse(userData);
+                console.log('User data loaded:', this.userData);
+                this.updateUserInfo(this.userData);
+            } else {
+                console.log('No user data found in localStorage');
+                this.userData = {}; // Гарантируем что это объект
+            }
+        } catch (error) {
+            console.error('Error loading user data:', error);
+            this.userData = {};
         }
+
+        this.updateWeatherWidget();
     }
 
     updateUserInfo(userData) {
@@ -52,6 +63,56 @@ class RecommendationsManager {
             const moodText = this.getMoodText(userData.mood);
             userMood.textContent = moodText;
         }
+    }
+
+    // Метод для обновления виджета погоды
+    updateWeatherWidget() {
+        const weatherWidget = document.querySelector('.weather-widget');
+        if (!weatherWidget) return;
+
+        const userWeather = this.userData.weather;
+        const weatherData = this.getWeatherData(userWeather);
+
+        // Добавляем проверку на случай, если weatherData undefined
+        if (!weatherData) {
+            console.warn('Weather data not found for type:', userWeather);
+            weatherWidget.innerHTML = `
+            <div class="weather-icon">🌤️</div>
+            <div class="weather-info">
+                <div class="weather-desc">Погода не указана</div>
+            </div>
+        `;
+            return;
+        }
+
+        weatherWidget.innerHTML = `
+        <div class="weather-icon">${weatherData.icon}</div>
+        <div class="weather-info">
+            <div class="weather-desc">${weatherData.description}</div>
+        </div>
+    `;
+    }
+
+    getWeatherData(weatherType) {
+        const weatherMap = {
+            sunny: {
+                icon: '☀️',
+                description: 'Солнечно, идеально для прогулок'
+            },
+            cloudy: {
+                icon: '☁️',
+                description: 'Облачно, хорошая погода для экскурсий'
+            },
+            rainy: {
+                icon: '🌧️',
+                description: 'Дождливо, отличный день для музеев и выставок'
+            },
+            snowy: {
+                icon: '❄️',
+                description: 'Снегопад, уютная атмосфера для закрытых мероприятий'
+            }
+        }
+        return weatherMap[weatherType];
     }
 
     getMoodText(mood) {
