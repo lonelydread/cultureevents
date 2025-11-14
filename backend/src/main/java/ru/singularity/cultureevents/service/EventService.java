@@ -25,18 +25,14 @@ public class EventService {
 
     public List<Event> getPersonalizedRecommendations(RecommendationRequest request) {
         // 1. Получаем базовые мероприятия по городу
-        List<Event> baseEvents = eventRepository.findByCityAndDateAfterOrderByDateAsc(
-                        request.getCity(), LocalDateTime.now()
-                ).stream()
-                .filter(p -> {
-                    String[] weatherArray = p.getWeather();
+            List<Event> baseEvents = eventRepository.findByCityAndDateAfterOrderByDateAsc(
+                    request.getCity(), LocalDateTime.now());
 
-                    String currentWeather = Parser.parseWeather(p.getCity());
-                    Set<String> weatherSet = Set.of(weatherArray);
-
-                    return weatherSet.contains("any") || weatherSet.contains(currentWeather);
-                })
-                .collect(Collectors.toList());
+            if (request.getWeather().equals("rainy") || request.getWeather().equals("snowy")) {
+                baseEvents = baseEvents.stream()
+                        .filter(Event::isWeather_dependent)
+                        .toList();
+            }
 
 
         // 2. Преобразуем запрос пользователя в вектор предпочтений

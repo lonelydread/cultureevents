@@ -101,63 +101,38 @@ class FavoritesManager {
         `).join('');
     }
 
-    getFavoritesData() {
-        // Mock data - in real app this would come from an API based on favorite IDs
-        const allPlaces = {
-            1: {
-                id: 1,
-                name: 'Кофейня "Уютный уголок"',
-                type: 'cafe',
-                description: 'Атмосферное место с авторским кофе и домашней выпечкой. Бесплатный Wi-Fi и розетки.',
-                distance: 0.5,
-                rating: 4.9,
-                hours: '7:00-23:00',
-                tags: ['Wi-Fi', 'Веганское меню', 'Рабочее место']
-            },
-            2: {
-                id: 2,
-                name: 'Галерея современного искусства',
-                type: 'art',
-                description: 'Современные выставки, инсталляции и мастер-классы. Вдохновляющая атмосфера для творческих натур.',
-                distance: 0.8,
-                rating: 4.6,
-                hours: '11:00-20:00',
-                tags: ['Выставки', 'Мастер-классы', 'Интерактивно']
-            },
-            3: {
-                id: 3,
-                name: 'Центральный парк культуры',
-                type: 'park',
-                description: 'Просторный парк с озерами, велодорожками и зонами для пикника. Идеально для активного отдыха.',
-                distance: 1.2,
-                rating: 4.8,
-                hours: '6:00-23:00',
-                tags: ['Велодорожки', 'Озеро', 'Пикник']
-            },
-            4: {
-                id: 4,
-                name: 'Библиотека им. Горького',
-                type: 'library',
-                description: 'Просторные читальные залы, современный интерьер и богатая коллекция литературы.',
-                distance: 1.5,
-                rating: 4.7,
-                hours: '9:00-21:00',
-                tags: ['Тишина', 'Wi-Fi', 'Исследования']
-            },
-            5: {
-                id: 5,
-                name: 'Спортивный комплекс "Энергия"',
-                type: 'sports',
-                description: 'Современный фитнес-центр с бассейном, тренажерным залом и групповыми занятиями.',
-                distance: 2.1,
-                rating: 4.7,
-                hours: '6:00-24:00',
-                tags: ['Бассейн', 'Тренажеры', 'Групповые занятия']
-            }
-        };
+    async getFavoritesData() {
+    try {
+        if (this.favorites.length === 0) {
+            return [];
+        }
 
-        return this.favorites.map(id => allPlaces[id]).filter(Boolean);
+        // Отправляем один запрос со списком ID
+        const response = await fetch('http://localhost:8080/api/places/favorites', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                placeIds: this.favorites
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const placesData = await response.json();
+        
+        // Преобразуем все данные разом
+        return placesData.map(place => this.transformPlaceData(place));
+        
+    } catch (error) {
+        console.error('Error loading favorites from API:', error);
+        this.showFeedback('Ошибка загрузки избранного', 'error');
+        return this.getFallbackData(); // Fallback на демо-данные
     }
+}
 
     getTypeIcon(type) {
         const icons = {
@@ -216,16 +191,11 @@ class FavoritesManager {
     updateStats() {
         const favoritesData = this.getFavoritesData();
         const totalFavorites = document.getElementById('totalFavorites');
-        const nearbyFavorites = document.getElementById('nearbyFavorites');
         
         if (totalFavorites) {
             totalFavorites.textContent = favoritesData.length;
         }
         
-        if (nearbyFavorites) {
-            const nearbyCount = favoritesData.filter(place => place.distance <= 2).length;
-            nearbyFavorites.textContent = nearbyCount;
-        }
     }
 
     toggleEmptyState() {
@@ -240,21 +210,6 @@ class FavoritesManager {
                 emptyState.classList.add('hidden');
                 favoritesGrid.classList.remove('hidden');
             }
-        }
-    }
-
-    showRoute(placeId) {
-        const place = this.getFavoritesData().find(p => p.id === placeId);
-        if (place) {
-            this.showFeedback(`Построение маршрута до "${place.name}"`, 'info');
-        }
-    }
-
-    scheduleVisit(placeId) {
-        const place = this.getFavoritesData().find(p => p.id === placeId);
-        if (place) {
-            // In a real app, this would open a calendar/scheduling interface
-            this.showFeedback(`Запланировано посещение "${place.name}"`, 'success');
         }
     }
 

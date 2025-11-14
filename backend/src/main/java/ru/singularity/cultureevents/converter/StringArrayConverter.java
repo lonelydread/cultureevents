@@ -14,7 +14,7 @@ public class StringArrayConverter implements AttributeConverter<String[], String
             return null;
         }
         // Преобразуем массив в строку: {"active", "cultural"} -> "active,cultural"
-        return "{" + String.join(DELIMITER, attribute) + "}";
+        return String.join(DELIMITER, attribute);
     }
 
     @Override

@@ -1,19 +1,17 @@
 package ru.singularity.cultureevents.engine;
 
+import org.springframework.stereotype.Component;
 import ru.singularity.cultureevents.dto.RecommendationRequest;
 import ru.singularity.cultureevents.model.Event;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class RecommendationEngine {
 
-    private static final double CATEGORY_WEIGHT = 0.5;
-    private static final double MOOD_WEIGHT = 0.6;
-//    private static final double AUDIENCE_WEIGHT = 1.2;
-//    private static final double CITY_WEIGHT = 1.0;
-//    private static final double WEATHER_WEIGHT = 1.8; // Высокий вес для погоды!
-//    private static final double PRICE_WEIGHT = 0.8;
+    private static final double CATEGORY_WEIGHT = 1.0;
+    private static final double MOOD_WEIGHT = 0.5;
     /**
      * Вычисляет косинусную схожесть между предпочтениями пользователя и тегами мероприятия
      */
@@ -39,8 +37,8 @@ public class RecommendationEngine {
         Map<String, Double> vector = new HashMap<>();
 
         // Категория (самый важный признак)
-        for (String category : event.getCategories()) {
-            vector.put(category, CATEGORY_WEIGHT);
+        for (String tag : event.getTags()) {
+            vector.put(tag, CATEGORY_WEIGHT);
         }
 
         // Настроение
