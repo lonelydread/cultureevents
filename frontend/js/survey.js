@@ -33,12 +33,6 @@ class SurveyManager {
             btn.addEventListener('click', () => this.prevStep());
         });
 
-        // Skip survey
-        document.getElementById('skipSurvey')?.addEventListener('click', (e) => {
-            e.preventDefault();
-            this.skipSurvey();
-        });
-
         // Mood selection
         document.querySelectorAll('.mood-option').forEach(option => {
             option.addEventListener('click', (e) => {
@@ -73,33 +67,33 @@ class SurveyManager {
     selectOption(type, element) {
         // Remove selection from all options in this group
         element.closest('.mood-options, .weather-options')
-              ?.querySelectorAll('.mood-option, .weather-option')
-              .forEach(opt => opt.classList.remove('selected'));
-        
+            ?.querySelectorAll('.mood-option, .weather-option')
+            .forEach(opt => opt.classList.remove('selected'));
+
         // Add selection to clicked option
         element.classList.add('selected');
-        
+
         // Enable next button
         const nextBtn = element.closest('.survey-card').querySelector('.next-card');
         nextBtn.disabled = false;
-        
+
         // Save data
         this.userData[type] = element.dataset[type];
     }
 
     toggleInterest(element) {
         element.classList.toggle('selected');
-        const favoriteTags = element.dataset.interest;
-        
+        const interest = element.dataset.interest;
+
         if (element.classList.contains('selected')) {
-            this.userData.favoriteTags.push(interest);
+            this.userData.interests.push(interest);
         } else {
-            this.userData.favoriteTags = this.userData.favoriteTags.filter(i => i !== interest);
+            this.userData.interests = this.userData.interests.filter(i => i !== interest);
         }
-        
+
         // Enable next button if at least one interest is selected
         const nextBtn = element.closest('.survey-card').querySelector('.next-card');
-        nextBtn.disabled = this.userData.favoriteTags.length === 0;
+        nextBtn.disabled = this.userData.interests.length === 0;
     }
 
     nextStep() {
@@ -108,7 +102,7 @@ class SurveyManager {
             this.currentStep++;
             this.showCurrentCard();
             this.updateProgress();
-            
+
             // Save to localStorage on completion
             if (this.currentStep === this.totalSteps) {
                 this.saveUserData();
@@ -129,7 +123,7 @@ class SurveyManager {
         const currentCard = document.querySelector(`.survey-card[data-step="${this.currentStep}"]`);
         currentCard.classList.remove('active');
         currentCard.classList.add(direction === 'right' ? 'exit-left' : 'exit-right');
-        
+
         setTimeout(() => {
             currentCard.classList.remove('exit-left', 'exit-right');
         }, 300);
@@ -154,50 +148,45 @@ class SurveyManager {
         console.log('User data saved:', this.userData);
     }
 
-    async sendRecommendationsRequest() {
-        try {
-            // Показываем индикатор загрузки
-            this.showLoadingState();
-            
-            // Подготавливаем данные для отправки
-            const requestData = {
-                city: "Moscow", // Добавляем город по умолчанию
-                favoriteCategories: this.userData.favoriteTags,
-                preferredMood: this.userData.mood,
-                weather: this.userData.weather
-            };
+    sendRecommendationsRequest() {
+        console.log('Starting sendRecommendationsRequest...');
 
-            console.log('Sending request to backend:', requestData);
+        this.showLoadingState();
 
-            // Отправляем POST запрос на бэкенд
-            const response = await fetch('http://localhost:8080/api/events/recommendations', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(requestData)
+        const requestData = {
+            city: "Москва",
+            favoriteCategories: this.userData.interests,
+            preferredMood: this.userData.mood,
+            weather: this.userData.weather
+        };
+
+        console.log('Sending request to backend:', requestData);
+
+        fetch('http://localhost:8080/api/events/recommendations', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(recommendations => {
+                console.log('Received recommendations:', recommendations);
+
+                // Сохраняем и перенаправляем
+                localStorage.setItem('recommendations', JSON.stringify(recommendations));
+                window.location.href = 'recommendations.html';
+            })
+            .catch(error => {
+                console.error('Error fetching recommendations:', error);
+                this.showError('Не удалось загрузить рекомендации. Пожалуйста, попробуйте позже.');
+                this.hideLoadingState();
             });
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const recommendations = await response.json();
-            console.log('Received recommendations:', recommendations);
-
-            // Сохраняем рекомендации в localStorage для использования на странице рекомендаций
-            localStorage.setItem('recommendations', JSON.stringify(recommendations));
-
-            // Перенаправляем на страницу рекомендаций
-            window.location.href = 'recommendations.html';
-
-        } catch (error) {
-            console.error('Error fetching recommendations:', error);
-            
-            // Показываем сообщение об ошибке
-            this.showError('Не удалось загрузить рекомендации. Пожалуйста, попробуйте позже.');
-            
-        }
     }
 
     showLoadingState() {
@@ -206,7 +195,7 @@ class SurveyManager {
             const originalText = button.innerHTML;
             button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Загрузка...';
             button.disabled = true;
-            
+
             // Восстанавливаем кнопку через 5 секунд на случай ошибки
             setTimeout(() => {
                 button.innerHTML = originalText;
@@ -223,7 +212,7 @@ class SurveyManager {
             <span>${message}</span>
             <button onclick="this.parentElement.remove()">&times;</button>
         `;
-        
+
         errorDiv.style.cssText = `
             position: fixed;
             top: 100px;
@@ -239,9 +228,9 @@ class SurveyManager {
             gap: 10px;
             animation: slideInRight 0.3s ease;
         `;
-        
+
         document.body.appendChild(errorDiv);
-        
+
         // Автоматически удаляем через 5 секунд
         setTimeout(() => {
             if (errorDiv.parentElement) {
@@ -297,5 +286,6 @@ class SurveyManager {
 
 // Initialize survey when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM fully loaded and parsed');
     new SurveyManager();
 });

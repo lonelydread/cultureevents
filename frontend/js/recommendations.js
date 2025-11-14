@@ -9,14 +9,13 @@ class RecommendationsManager {
         this.loadUserData();
         this.loadRecommendationsFromBackend(); // Заменяем generateRecommendations
         this.bindEvents();
-        this.updateResultsCount();
     }
 
     async loadRecommendationsFromBackend() {
         try {
             // Пытаемся загрузить рекомендации из localStorage
             const savedRecommendations = localStorage.getItem('recommendations');
-            
+
             if (savedRecommendations) {
                 this.recommendations = JSON.parse(savedRecommendations);
                 console.log('Loaded recommendations from backend:', this.recommendations);
@@ -24,9 +23,9 @@ class RecommendationsManager {
                 // Если нет сохраненных рекомендаций, используем демо-данные
                 console.log('No backend recommendations found, using demo data');
             }
-            
+
             this.renderRecommendations();
-            
+
         } catch (error) {
             console.error('Error loading recommendations:', error);
         }
@@ -67,28 +66,112 @@ class RecommendationsManager {
 
     renderRecommendations() {
         const grid = document.getElementById('recommendationsGrid');
-        if (!grid) return;
-        
-        grid.innerHTML = this.recommendations.map(place => `
-            <div class="recommendation-card" data-id="${place.id}">
-                <div class="card-image">
-                    ${this.getTypeIcon(place.category)}
-                    <div class="place-type">${this.getTypeText(place.category)}</div>
-                </div>
-                <div class="card-content">
-                    <h3>${place.name}</h3>
-                    <p>${place.description}</p>
-                    <div class="card-actions">
-                        <button class="action-btn secondary-action" onclick="recommendationsManager.showDetails(${place.id})">
-                            <i class="fas fa-info-circle"></i>
-                            Подробнее
-                        </button>
+        if (!grid) {
+            console.error('Recommendations grid not found');
+            return;
+        }
+
+        console.log('Rendering recommendations with data:', this.recommendations);
+        grid.innerHTML = this.recommendations.map((event, index) => `
+        <div class="recommendation-card" data-id="${event.id || index}">
+            <div class="card-image">
+                ${event.imageUrl ?
+                `<img src="${event.imageUrl}" alt="${event.title}" onerror="this.style.display='none'">` :
+                this.getTypeIcon(event.category)
+            }
+                <div class="place-type">${this.getTypeText(event.category)}</div>
+                <button class="favorite-btn" onclick="recommendationsManager.toggleFavorite(${event.id || index})">
+                    <i class="fas ${this.isFavorite(event.id || index) ? 'fa-heart' : 'fa-heart'}"></i>
+                </button>
+            </div>
+            <div class="card-content">
+                <h3>${event.title || `Событие ${index + 1}`}</h3>
+                <p>${event.description || 'Интересное событие для посещения'}</p>
+                
+                <!-- Блок даты и времени -->
+                <div class="event-time-info">
+                    <div class="time-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>${this.formatDate(event.date)}</span>
                     </div>
+                    <div class="time-item">
+                        <i class="fas fa-clock"></i>
+                        <span>${this.formatTime(event.date)}</span>
+                    </div>
+                    ${event.location ? `
+                    <div class="time-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>${event.location}</span>
+                    </div>
+                    ` : ''}
+                </div>
+                
+                <div class="card-details">
+                    <div class="detail-item">
+                        <i class="fas fa-tag"></i>
+                        <span>${this.getTypeText(event.category)}</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>${event.city || 'Москва'}</span>
+                    </div>
+                    ${event.price ? `
+                    <div class="detail-item">
+                        <i class="fas fa-ruble-sign"></i>
+                        <span>${this.formatPrice(event.price)}</span>
+                    </div>
+                    ` : ''}
+                </div>
+                <div class="card-actions">
+                    <button class="action-btn secondary-action" onclick="recommendationsManager.showDetails(${event.id || index})">
+                        <i class="fas fa-info-circle"></i>
+                        Подробнее
+                    </button>
                 </div>
             </div>
-        `).join('');
+        </div>
+    `).join('');
     }
 
+    formatDate(dateString) {
+        if (!dateString) return '-';
+
+        try {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('ru-RU', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+                weekday: 'long'
+            });
+        } catch (e) {
+            console.warn('Error formatting date:', e);
+            return '-';
+        }
+    }
+
+    formatTime(dateString) {
+        if (!dateString) return '-';
+
+        try {
+            const date = new Date(dateString);
+            return date.toLocaleTimeString('ru-RU', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        } catch (e) {
+            console.warn('Error formatting time:', e);
+            return '-';
+        }
+    }
+
+    // Метод для форматирования цены
+    formatPrice(price) {
+        if (price === 0 || price === '0') {
+            return 'Бесплатно';
+        }
+        return `${price} ₽`;
+    }
 
     getTypeIcon(category) {
         const icons = {
@@ -125,16 +208,16 @@ class RecommendationsManager {
     toggleFavorite(placeId) {
         const favorites = this.getFavorites();
         const index = favorites.indexOf(placeId);
-        
+
         if (index > -1) {
             favorites.splice(index, 1);
         } else {
             favorites.push(placeId);
         }
-        
+
         localStorage.setItem('favorites', JSON.stringify(favorites));
         this.renderRecommendations();
-        
+
         // Show feedback
         this.showFeedback(
             index > -1 ? 'Убрано из избранного' : 'Добавлено в избранное',
@@ -173,7 +256,7 @@ class RecommendationsManager {
             <span>${message}</span>
             <button onclick="this.parentElement.remove()">&times;</button>
         `;
-        
+
         // Add styles
         feedback.style.cssText = `
             position: fixed;
@@ -190,9 +273,9 @@ class RecommendationsManager {
             gap: 10px;
             animation: slideInRight 0.3s ease;
         `;
-        
+
         document.body.appendChild(feedback);
-        
+
         // Auto remove after 3 seconds
         setTimeout(() => {
             if (feedback.parentElement) {
