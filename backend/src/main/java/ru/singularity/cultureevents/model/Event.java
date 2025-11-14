@@ -22,11 +22,12 @@ public class Event {
     private String description;
 
     @Column(nullable = false)
-    private String category;
+    private String category; // основная категория: nature, art, culture, sports, science, music
+
 
     @Convert(converter = StringArrayConverter.class)
-    @Column(columnDefinition = "text[]")
-    private String[] tags; // concert, exhibition, theater, festival, standup
+    private String[] tags; // несколько тегов: nature, art, culture, sports, science, music
+
 
     @Column(nullable = false)
     private String city;
@@ -41,16 +42,8 @@ public class Event {
 
     // Поля для системы рекомендаций
     @Convert(converter = StringArrayConverter.class)
-    @Column(columnDefinition = "text[]")
-    private String[] moods; // active, chill, cultural
+    private String[] moods; // active, relaxed, social, creative
 
-
-    @Convert(converter = StringArrayConverter.class)
-    @Column(columnDefinition = "text[]")
-    private String[] audiences; // friends, couples, family, solo
-
-    @Convert(converter = StringArrayConverter.class)
-    @Column(columnDefinition = "text[]")
-    private String[] weather;
+    private boolean weather_dependent;
 
 }

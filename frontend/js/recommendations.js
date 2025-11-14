@@ -72,11 +72,8 @@ class RecommendationsManager {
         grid.innerHTML = this.recommendations.map(place => `
             <div class="recommendation-card" data-id="${place.id}">
                 <div class="card-image">
-                    ${this.getTypeIcon(place.type)}
-                    <div class="place-type">${this.getTypeText(place.type)}</div>
-                    <button class="favorite-btn" onclick="recommendationsManager.toggleFavorite(${place.id})">
-                        <i class="${this.isFavorite(place.id) ? 'fas' : 'far'} fa-heart"></i>
-                    </button>
+                    ${this.getTypeIcon(place.category)}
+                    <div class="place-type">${this.getTypeText(place.category)}</div>
                 </div>
                 <div class="card-content">
                     <h3>${place.name}</h3>
@@ -93,7 +90,7 @@ class RecommendationsManager {
     }
 
 
-    getTypeIcon(type) {
+    getTypeIcon(category) {
         const icons = {
             nature: '🌳',
             art: '🎨',
@@ -102,7 +99,7 @@ class RecommendationsManager {
             science: '🔬',
             music: '🎵'
         };
-        return icons[type] || '📍';
+        return icons[category] || '📍';
     }
 
     getTypeText(type) {

@@ -161,9 +161,10 @@ class SurveyManager {
             
             // Подготавливаем данные для отправки
             const requestData = {
-                city: this.userData.city, // Добавляем город по умолчанию
+                city: "Moscow", // Добавляем город по умолчанию
                 favoriteCategories: this.userData.favoriteTags,
-                preferredMood: this.userData.mood
+                preferredMood: this.userData.mood,
+                weather: this.userData.weather
             };
 
             console.log('Sending request to backend:', requestData);

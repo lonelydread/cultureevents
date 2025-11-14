@@ -1,11 +1,13 @@
 package ru.singularity.cultureevents.engine;
 
+import org.springframework.stereotype.Component;
 import ru.singularity.cultureevents.dto.RecommendationRequest;
 import ru.singularity.cultureevents.model.Event;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class RecommendationEngine {
 
     private static final double CATEGORY_WEIGHT = 1.0;
@@ -35,8 +37,8 @@ public class RecommendationEngine {
         Map<String, Double> vector = new HashMap<>();
 
         // Категория (самый важный признак)
-        for (String category : event.getCategories()) {
-            vector.put(category, CATEGORY_WEIGHT);
+        for (String tag : event.getTags()) {
+            vector.put(tag, CATEGORY_WEIGHT);
         }
 
         // Настроение
