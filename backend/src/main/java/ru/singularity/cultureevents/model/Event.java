@@ -21,6 +21,9 @@ public class Event {
     @Column(columnDefinition = "TEXT")
     private String description;
 
+    @Column(nullable = false)
+    private String category;
+
     @Convert(converter = StringArrayConverter.class)
     @Column(columnDefinition = "text[]")
     private String[] categories; // concert, exhibition, theater, festival, standup
