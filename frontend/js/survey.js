@@ -89,17 +89,17 @@ class SurveyManager {
 
     toggleInterest(element) {
         element.classList.toggle('selected');
-        const favoriteTags = element.dataset.interest;
+        const interest = element.dataset.interest;
         
         if (element.classList.contains('selected')) {
-            this.userData.favoriteTags.push(interest);
+            this.userData.interest.push(interest);
         } else {
-            this.userData.favoriteTags = this.userData.favoriteTags.filter(i => i !== interest);
+            this.userData.interest = this.userData.interest.filter(i => i !== interest);
         }
         
         // Enable next button if at least one interest is selected
         const nextBtn = element.closest('.survey-card').querySelector('.next-card');
-        nextBtn.disabled = this.userData.favoriteTags.length === 0;
+        nextBtn.disabled = this.userData.interest.length === 0;
     }
 
     nextStep() {
@@ -161,8 +161,8 @@ class SurveyManager {
             
             // Подготавливаем данные для отправки
             const requestData = {
-                city: "Moscow", // Добавляем город по умолчанию
-                favoriteCategories: this.userData.favoriteTags,
+                city: "Москва", // Добавляем город по умолчанию
+                favoriteCategories: this.userData.interest,
                 preferredMood: this.userData.mood,
                 weather: this.userData.weather
             };
