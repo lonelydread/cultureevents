@@ -26,7 +26,7 @@ public class Event {
 
 
     @Convert(converter = StringArrayConverter.class)
-    private String[] tags; // несколько тегов: nature, art, culture, sports, science, music
+    private String[] tags; // несколько тегов:
 
 
     @Column(nullable = false)
@@ -40,7 +40,6 @@ public class Event {
     private BigDecimal price;
     private String imageUrl;
 
-    // Поля для системы рекомендаций
     @Convert(converter = StringArrayConverter.class)
     private String[] moods; // active, relaxed, social, creative
 

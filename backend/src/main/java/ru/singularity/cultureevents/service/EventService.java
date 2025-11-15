@@ -9,10 +9,7 @@ import ru.singularity.cultureevents.model.Event;
 import ru.singularity.cultureevents.repository.EventRepository;
 
 import java.time.LocalDateTime;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -25,14 +22,21 @@ public class EventService {
 
     public List<Event> getPersonalizedRecommendations(RecommendationRequest request) {
         // 1. Получаем базовые мероприятия по городу
-            List<Event> baseEvents = eventRepository.findByCityAndDateAfterOrderByDateAsc(
-                    request.getCity(), LocalDateTime.now());
+        List<Event> baseEvents = eventRepository.findByCityAndDateAfterOrderByDateAsc(
+                request.getCity(), LocalDateTime.now());
 
-            if (request.getWeather().equals("rainy") || request.getWeather().equals("snowy")) {
-                baseEvents = baseEvents.stream()
-                        .filter(p-> !p.isWeather_dependent())
-                        .toList();
-            }
+        // сортировка по категориям и настроению
+        baseEvents = baseEvents.stream()
+                .filter(event -> request.getFavoriteCategories().contains(event.getCategory()))
+                .toList();
+
+        System.out.println(baseEvents);
+
+        if (request.getWeather().equals("rainy") || request.getWeather().equals("snowy")) {
+            baseEvents = baseEvents.stream()
+                    .filter(p -> !p.isWeather_dependent())
+                    .toList();
+        }
 
 
         // 2. Преобразуем запрос пользователя в вектор предпочтений

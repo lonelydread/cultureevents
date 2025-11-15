@@ -10,8 +10,9 @@ import java.util.Map;
 @Component
 public class RecommendationEngine {
 
-    private static final double CATEGORY_WEIGHT = 1.0;
+    private static final double TAGS_WEIGHT = 1.0;
     private static final double MOOD_WEIGHT = 0.5;
+
     /**
      * Вычисляет косинусную схожесть между предпочтениями пользователя и тегами мероприятия
      */
@@ -36,21 +37,13 @@ public class RecommendationEngine {
     public Map<String, Double> eventToVector(Event event) {
         Map<String, Double> vector = new HashMap<>();
 
-        // Категория (самый важный признак)
         for (String tag : event.getTags()) {
-            vector.put(tag, CATEGORY_WEIGHT);
+            vector.put(tag, TAGS_WEIGHT);
         }
 
-        // Настроение
         for (String mood : event.getMoods()) {
             vector.put(mood, MOOD_WEIGHT);
         }
-
-
-        // Аудитория
-//        for (String audience : event.getAudiences()) {
-//            vector.put(audience, AUDIENCE_WEIGHT);
-//        }
 
 
         return vector;
@@ -62,22 +55,13 @@ public class RecommendationEngine {
     public Map<String, Double> requestToVector(RecommendationRequest request) {
         Map<String, Double> vector = new HashMap<>();
 
-        // Любимые категории
 
-            for (String category : request.getFavoriteCategories()) {
-                vector.put(category, CATEGORY_WEIGHT);
-            }
+        if (request.getFavoriteTags() != null) {
+            // Копируем все теги с их весами
+            vector.putAll(request.getFavoriteTags());
+        }
 
-
-        // Предпочтительное настроение
-            vector.put(request.getPreferredMood(), MOOD_WEIGHT);
-
-
-        // Предпочтительная аудитория
-//            for (String audience : request.getPreferredAudiences()) {
-//                vector.put(audience, AUDIENCE_WEIGHT);
-//        }
-
+        vector.put(request.getPreferredMood(), MOOD_WEIGHT);
 
         return vector;
     }
